@@ -1,0 +1,137 @@
+Starting crawl of 15 Hot Springs Village businesses...
+Using model: qwen2.5:0.5b
+
+[ 1/15] Hot Springs Village POA ... unreachable (Connection refused / DNS failure) → scoring... 5/10
+[ 2/15] HSV Real Estate (DeSoto Club) ... HTTP 200 → scoring... 3/10
+[ 3/15] Diamante Country Club ... unreachable (Connection refused / DNS failure) → scoring... 7/10
+[ 4/15] The Village Voice (local paper) ... HTTP 200 → scoring... 8/10
+[ 5/15] HSV Golf (Coronado Course) ... HTTP 200 → scoring... 3/10
+[ 6/15] Balboa Club Restaurant ... HTTP 200 → scoring... 5/10
+[ 7/15] Hot Springs Village Chamber ... HTTP 200 → scoring... 7/10
+[ 8/15] HSV Real Estate Advantage ... unreachable (Connection refused / DNS failure) → scoring... 5/10
+[ 9/15] The Woodlands Audiology ... unreachable (Connection refused / DNS failure) → scoring... 5/10
+[10/15] HSV Farmers Market ... unreachable (Connection refused / DNS failure) → scoring... 1/10
+[11/15] Village Dentistry ... unreachable (Connection refused / DNS failure) → scoring... 8/10
+[12/15] Ouachita Lakes Insurance ... unreachable (Connection refused / DNS failure) → scoring... 9/10
+[13/15] HSV Animal Welfare League ... HTTP 200 → scoring... 8/10
+[14/15] Coronado Community Center ... unreachable (Connection refused / DNS failure) → scoring... 1/10
+[15/15] Alegria Mexican Restaurant HSV ... unreachable (Connection refused / DNS failure) → scoring... 1/10
+
+══════════════════════════════════════════════════════════════════════════════
+  HOT SPRINGS VILLAGE AR — AI READINESS LEAD REPORT
+  Model: qwen2.5:0.5b  |  Businesses scanned: 15
+══════════════════════════════════════════════════════════════════════════════
+
+  [ 1/10] █░░░░░░░░░  Alegria Mexican Restaurant HSV
+         https://www.alegriarestaurantarkansas.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The URL provided, https://www.alegriarestaurantarkansas.com, is not a valid or reachable website as it cannot be reached (error: Connection refused / DNS failure). This suggests the business may have low digital maturity and connectivity issues.
+
+  [ 1/10] █░░░░░░░░░  Coronado Community Center
+         https://www.hsvpoa.org/amenities/coronado
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The provided URL, https://www.hsvpoa.org/amenities/coronado, is not a valid or accessible website. It appears to be an internal link or a broken external link that cannot be reached directly. This indicates that the business 'Coronado Community Center' at [insert location] likely has very low digital maturity as it is unable to communicate with users and access resources.
+
+  [ 1/10] █░░░░░░░░░  HSV Farmers Market
+         https://www.hsvfarmersmarket.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The provided link to the Business 'HSV Farmers Market' is marked as unreachable, indicating a potential issue with the service. This suggests that the website may not be functioning correctly or there might be technical problems causing it to fail to connect. Therefore, we need to assess the digital maturity of the business and consider if it has sufficient infrastructure and strategies in place to handle a missing site.
+
+  [ 3/10] ███░░░░░░░  HSV Golf (Coronado Course)
+         https://www.hsvgolf.com
+         ✓ online  |  ~821 words
+         Features: e-comm, analytics, form, ssl, mobile
+         AI take: The business website and digital features are rudimentary, lacking advanced tools like chatbots, automated scheduling, AI-generated content, or predictive analytics. This limits the potential for significant benefit from using AI technologies in terms of site optimization, user experience improvements, and enhanced operational efficiency.
+
+  [ 3/10] ███░░░░░░░  HSV Real Estate (DeSoto Club)
+         https://www.hsvrealty.com
+         ✓ online
+         Features: ssl
+         AI take: The business does not have a CMS set up or contact form, which makes it less suitable for utilizing advanced digital features like chatbots, automated scheduling, AI-generated content, or predictive analytics. While some of these features might be possible with certain tools, it's more about the lack of setup compared to other areas where an artificial intelligence could make a significant difference.
+
+  [ 5/10] █████░░░░░  Balboa Club Restaurant
+         https://www.balboaclub.com
+         ✓ online
+         Features: ssl
+         AI take: The business has limited digital presence and current offerings. While the restaurant website offers some features like SSL, HTTPS, and contact form, these are not as advanced for AI tools like chatbots or automated scheduling. Additionally, the ability to send live chats via chatbot, online booking through e-commerce platform, E-commerce functionality, analytics, social media links, mobile-friendly design with viewport support, schema.org markup, newsletter/capture features such as email capture and mobile-app notifications is already present in the business. The reachability of this business is good as it has a website with SSL and HTTPS.
+
+  [ 5/10] █████░░░░░  HSV Real Estate Advantage
+         https://www.hsvadvantage.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The website 'HSV Real Estate Advantage' is unable to be reached due to a DNS failure, indicating poor connectivity or limited access. This suggests the business lacks sufficient digital infrastructure and could need improvement in its network setup for better user experience.
+
+  [ 5/10] █████░░░░░  Hot Springs Village POA
+         https://www.hsvpoa.org
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The Hot Springs Village POA at https://www.hsvpoa.org is an unreachable or missing website, which indicates that the business likely has very low digital maturity.
+
+  [ 5/10] █████░░░░░  The Woodlands Audiology
+         https://www.woodlandsaudiologyar.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The website "The Woodlands Audiology" at https://www.woodlandsaudiologyar.com" is unreachable or missing, indicating a high level of digital maturity. For the business to have low digital maturity, it needs to be more established and secure in its online presence.
+
+  [ 7/10] ███████░░░  Diamante Country Club
+         https://www.diamantecountryclub.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The website "Diamante Country Club" is not reachable, which suggests a poor level of digital maturity. It could be because the domain name or server settings are causing the issue.
+
+  [ 7/10] ███████░░░  Hot Springs Village Chamber
+         https://www.hotspringsvillagechamber.com
+         ✓ online  |  CMS: Squarespace  |  ~722 words
+         Features: booking, e-comm, form, social, newsletter, schema, ssl, mobile
+         AI take: The Hot Springs Village Chamber website and CMS show that they have a good digital presence, but the page excerpt does not provide specific information or benefits of AI tools. Therefore, while the business could benefit from some AI-related features like chatbots, automated scheduling, AI-generated content, or predictive analytics, the current content only covers the basic contact form and social media links.
+
+  [ 8/10] ████████░░  HSV Animal Welfare League
+         https://www.hsvawl.org
+         ✓ online  |  ~2888 words
+         Features: social, newsletter, schema, ssl, mobile
+         AI take: The HSV Animal Welfare League website is not using any digital features, including social media links or CMS options. Therefore, there are no tangible benefits from AI tools like chatbots, automated scheduling, AI-generated content, or predictive analytics that can be directly addressed in this assessment. While the presence of some digital elements may indicate a good overall digital presence and potential growth opportunities for the business, it is not sufficient to support the AI readiness score of 10.
+
+  [ 8/10] ████████░░  The Village Voice (local paper)
+         https://thevillagevoice.com
+         ✓ online  |  ~105 words
+         Features: e-comm, schema, ssl, mobile
+         AI take: The business is very digital and needs some form of automation or AI tools to enhance its current presence. They are selling a domain, which typically requires manual handling rather than AI integration, making it unlikely for them to benefit significantly from AI technology currently available on this platform. Additionally, the absence of features such as chatbots, automated scheduling, AI-generated content, or predictive analytics can limit their potential benefits. Therefore, they would benefit more from these digital enhancements in terms of AI readiness.
+
+  [ 8/10] ████████░░  Village Dentistry
+         https://www.villagedentistryar.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The provided URL (https://www.villagedentistryar.com) is not reachable, indicating potential issues with domain ownership or DNS configuration. This suggests a lower level of digital maturity in the business.
+
+  [ 9/10] █████████░  Ouachita Lakes Insurance
+         https://www.ouachitalakesinsurance.com
+         ✗ offline (Connection refused / DNS failure)
+         Features: ssl
+         AI take: The Ouachita Lakes Insurance business at https://www.ouachitalakesinsurance.com is not reachable or missing, indicating a lack of digital maturity among the AI-ready businesses on Alibaba Cloud's platform.
+
+──────────────────────────────────────────────────────────────────────────────
+  BUSINESS                               SCORE  STATUS
+──────────────────────────────────────────────────────────────────────────────
+  Alegria Mexican Restaurant HSV             1/10  offline
+  Coronado Community Center                  1/10  offline
+  HSV Farmers Market                         1/10  offline
+  HSV Golf (Coronado Course)                 3/10  online
+  HSV Real Estate (DeSoto Club)              3/10  online
+  Balboa Club Restaurant                     5/10  online
+  HSV Real Estate Advantage                  5/10  offline
+  Hot Springs Village POA                    5/10  offline
+  The Woodlands Audiology                    5/10  offline
+  Diamante Country Club                      7/10  offline
+  Hot Springs Village Chamber                7/10  online
+  HSV Animal Welfare League                  8/10  online
+  The Village Voice (local paper)            8/10  online
+  Village Dentistry                          8/10  offline
+  Ouachita Lakes Insurance                   9/10  offline
+──────────────────────────────────────────────────────────────────────────────
+  Average score: 5.1/10
+  Top lead (lowest score = biggest AI gap): Alegria Mexican Restaurant HSV (1/10)
+══════════════════════════════════════════════════════════════════════════════
+
