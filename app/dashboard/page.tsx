@@ -32,6 +32,12 @@ const quickActions = [
     action: "Open health",
   },
   {
+    title: "Status page",
+    description: "View live system cards, readiness, and install paths.",
+    href: "/status",
+    action: "Open status",
+  },
+  {
     title: "GitHub repo",
     description: "Review the code, commits, and future fleet upgrades.",
     href: "https://github.com/Snowman501/crawler-fleet",

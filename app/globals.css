@@ -540,6 +540,11 @@ time {
   gap: 24px;
 }
 
+.status-shell {
+  display: grid;
+  gap: 24px;
+}
+
 .marketing-shell {
   display: grid;
   gap: 24px;
@@ -602,6 +607,23 @@ time {
 
 .panel {
   padding: 20px;
+}
+
+.status-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+}
+
+.status-banner p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .control-card {
@@ -776,17 +798,40 @@ time {
   margin-bottom: 0;
 }
 
+.install-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.install-card {
+  display: grid;
+  align-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fff;
+}
+
+.install-card p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 @media (max-width: 820px) {
   .field-row,
   .summary-grid,
   .dashboard-grid,
   .dashboard-columns,
   .roadmap-grid,
+  .install-grid,
   .service-grid,
   .marketing-grid,
   .offer-grid,
   .promo-panel,
   .trust-strip,
+  .status-banner,
   .step-grid,
   .lead-panel,
   .form-grid {
