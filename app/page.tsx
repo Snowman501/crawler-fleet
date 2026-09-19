@@ -152,8 +152,8 @@ export default function Home() {
         </div>
         <h1>Rough checks. Clean evidence. No guesswork.</h1>
         <p className="intro">
-          One page in. A battle plan out. Run a safe website recon scan for technical, content, trust, and conversion
-          basics.
+          One page in. A battle plan out. Run a safe website recon scan across SEO basics, headings, links, images,
+          trust signals, conversion paths, robots, and sitemap health.
         </p>
         <form className="check-form" onSubmit={runCheck}>
           <label htmlFor="url">Website URL</label>

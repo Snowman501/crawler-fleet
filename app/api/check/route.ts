@@ -29,7 +29,30 @@ const checks = [
     check: "Mobile viewport tag",
     evidence: 'meta[name="viewport"]',
     why_it_matters: "A viewport tag helps the page render correctly on phones.",
-    detect: (context: PageContext) => /<meta\b[^>]*name=["']viewport["'][^>]*>/i.test(context.html),
+    detect: (context: PageContext) => hasMetaName(context.html, "viewport"),
+  },
+  {
+    team: "technical",
+    check: "Canonical URL",
+    evidence: 'link[rel="canonical"]',
+    why_it_matters: "A canonical URL helps search engines understand the preferred page address.",
+    detect: (context: PageContext) => /<link\b[^>]*rel=["'][^"']*\bcanonical\b[^"']*["'][^>]*>/i.test(context.html),
+  },
+  {
+    team: "technical",
+    check: "Robots file reachable",
+    evidence: "/robots.txt",
+    why_it_matters: "A robots file gives crawlers basic instructions and can point them toward important content.",
+    detect: (context: PageContext) => context.originChecks.robots.ok,
+    detail: (context: PageContext) => context.originChecks.robots.evidence,
+  },
+  {
+    team: "technical",
+    check: "Sitemap reachable",
+    evidence: "/sitemap.xml",
+    why_it_matters: "A sitemap helps search engines discover the important pages faster.",
+    detect: (context: PageContext) => context.originChecks.sitemap.ok,
+    detail: (context: PageContext) => context.originChecks.sitemap.evidence,
   },
   {
     team: "content",
@@ -46,11 +69,65 @@ const checks = [
     detect: (context: PageContext) => context.description.length > 0,
   },
   {
+    team: "content",
+    check: "Single H1 heading",
+    evidence: "<h1>",
+    why_it_matters: "One clear H1 gives visitors and search engines a strong page topic.",
+    detect: (context: PageContext) => context.h1Count === 1,
+    detail: (context: PageContext) => `H1 count: ${context.h1Count}`,
+  },
+  {
+    team: "content",
+    check: "Social preview tags",
+    evidence: 'meta[property="og:title"], meta[property="og:description"]',
+    why_it_matters: "Social preview tags make shared links look more trustworthy and clickable.",
+    detect: (context: PageContext) =>
+      hasMetaProperty(context.html, "og:title") && hasMetaProperty(context.html, "og:description"),
+  },
+  {
+    team: "content",
+    check: "Images have alt text",
+    evidence: "<img alt>",
+    why_it_matters: "Alt text improves accessibility and gives image-heavy pages more readable context.",
+    detect: (context: PageContext) => context.imageCount > 0 && context.imagesWithAlt === context.imageCount,
+    detail: (context: PageContext) => `${context.imagesWithAlt}/${context.imageCount} images include alt text`,
+  },
+  {
+    team: "content",
+    check: "Links present on page",
+    evidence: "anchor href values",
+    why_it_matters: "Useful links help people continue their path instead of hitting a dead end.",
+    detect: (context: PageContext) => context.linkCount > 0,
+    detail: (context: PageContext) =>
+      `${context.internalLinkCount} internal links; ${context.externalLinkCount} external links`,
+  },
+  {
     team: "trust",
     check: "Contact link on inspected page",
     evidence: "anchor href values",
     why_it_matters: "A visible contact path makes the business easier to trust and reach.",
     detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(contact|mailto:)[^"']*["'][^>]*>/i.test(context.html),
+  },
+  {
+    team: "trust",
+    check: "About link on inspected page",
+    evidence: "anchor href values",
+    why_it_matters: "An about path helps visitors quickly understand who is behind the business.",
+    detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(about|company|story)[^"']*["'][^>]*>/i.test(context.html),
+  },
+  {
+    team: "trust",
+    check: "Privacy or policy link",
+    evidence: "anchor href values",
+    why_it_matters: "Policy links are basic trust signals for customers, platforms, and payment reviews.",
+    detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(privacy|policy|terms)[^"']*["'][^>]*>/i.test(context.html),
+  },
+  {
+    team: "trust",
+    check: "Direct email or phone path",
+    evidence: "mailto: or tel: link",
+    why_it_matters: "A direct contact option lowers friction when someone is ready to ask for help.",
+    detect: (context: PageContext) => /<a\b[^>]*href=["'](?:mailto:|tel:)[^"']+["'][^>]*>/i.test(context.html),
   },
   {
     team: "conversion",
@@ -59,6 +136,26 @@ const checks = [
     why_it_matters: "A form can turn visitor interest into a lead or customer request.",
     detect: (context: PageContext) => /<form\b/i.test(context.html),
   },
+  {
+    team: "conversion",
+    check: "Call-to-action language",
+    evidence: "button and link text",
+    why_it_matters: "Clear action language tells visitors what to do next.",
+    detect: (context: PageContext) =>
+      /\b(get started|contact|book|schedule|quote|buy|order|subscribe|sign up|request|start|call now)\b/i.test(
+        context.visibleActionText,
+      ),
+  },
+  {
+    team: "conversion",
+    check: "Lead capture path",
+    evidence: "form, mailto, tel, or CTA link",
+    why_it_matters: "A lead path turns a page from information into a business pipeline.",
+    detect: (context: PageContext) =>
+      /<form\b/i.test(context.html) ||
+      /<a\b[^>]*href=["'](?:mailto:|tel:)[^"']+["'][^>]*>/i.test(context.html) ||
+      /\b(contact|book|schedule|quote|request)\b/i.test(context.visibleActionText),
+  },
 ];
 
 type PageContext = {
@@ -66,6 +163,24 @@ type PageContext = {
   html: string;
   title: string;
   description: string;
+  h1Count: number;
+  imageCount: number;
+  imagesWithAlt: number;
+  linkCount: number;
+  internalLinkCount: number;
+  externalLinkCount: number;
+  visibleActionText: string;
+  originChecks: OriginChecks;
+};
+
+type OriginResourceCheck = {
+  ok: boolean;
+  evidence: string;
+};
+
+type OriginChecks = {
+  robots: OriginResourceCheck;
+  sitemap: OriginResourceCheck;
 };
 
 export async function POST(request: Request) {
@@ -76,17 +191,28 @@ export async function POST(request: Request) {
     }
 
     const { finalUrl, html } = await fetchHtml(body.url);
+    const originChecks = await fetchOriginChecks(finalUrl);
+    const linkStats = countLinks(html, finalUrl);
+    const imageStats = countImages(html);
     const context: PageContext = {
       url: finalUrl,
       html,
       title: extractTitle(html),
       description: extractDescription(html),
+      h1Count: countTags(html, "h1"),
+      imageCount: imageStats.total,
+      imagesWithAlt: imageStats.withAlt,
+      linkCount: linkStats.total,
+      internalLinkCount: linkStats.internal,
+      externalLinkCount: linkStats.external,
+      visibleActionText: extractActionText(html),
+      originChecks,
     };
     const findings = checks.map<Finding>((check) => ({
       team: check.team,
       check: check.check,
       detected: check.detect(context),
-      evidence: check.check === "HTTPS at final URL" ? finalUrl.toString() : check.evidence,
+      evidence: check.detail?.(context) ?? (check.check === "HTTPS at final URL" ? finalUrl.toString() : check.evidence),
       why_it_matters: check.why_it_matters,
     }));
 
@@ -136,6 +262,33 @@ async function fetchHtml(input: string) {
   }
 
   throw new Error("Too many redirects.");
+}
+
+async function fetchOriginChecks(url: URL): Promise<OriginChecks> {
+  const [robots, sitemap] = await Promise.all([
+    checkOriginResource(url, "/robots.txt"),
+    checkOriginResource(url, "/sitemap.xml"),
+  ]);
+  return { robots, sitemap };
+}
+
+async function checkOriginResource(baseUrl: URL, pathname: string): Promise<OriginResourceCheck> {
+  const resourceUrl = validateUrl(new URL(pathname, baseUrl.origin).toString());
+  try {
+    await assertPublicHostname(resourceUrl);
+    const response = await fetch(resourceUrl, {
+      redirect: "manual",
+      headers: { "User-Agent": "CrawlerFleet/0.4 (+website recon; contact site owner)" },
+      signal: AbortSignal.timeout(8_000),
+    });
+    await response.body?.cancel();
+    return {
+      ok: response.status >= 200 && response.status < 400,
+      evidence: `${pathname} returned HTTP ${response.status}`,
+    };
+  } catch {
+    return { ok: false, evidence: `${pathname} was not reachable during this check` };
+  }
 }
 
 function validateUrl(input: string) {
@@ -216,6 +369,67 @@ function extractTitle(html: string) {
 function extractDescription(html: string) {
   const match = html.match(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i);
   return decodeEntities(match?.[1] ?? "").trim();
+}
+
+function hasMetaName(html: string, name: string) {
+  return new RegExp(`<meta\\b[^>]*name=["']${escapeRegExp(name)}["'][^>]*>`, "i").test(html);
+}
+
+function hasMetaProperty(html: string, property: string) {
+  return new RegExp(`<meta\\b[^>]*property=["']${escapeRegExp(property)}["'][^>]*>`, "i").test(html);
+}
+
+function countTags(html: string, tag: string) {
+  return html.match(new RegExp(`<${escapeRegExp(tag)}\\b`, "gi"))?.length ?? 0;
+}
+
+function countImages(html: string) {
+  const images = html.match(/<img\b[^>]*>/gi) ?? [];
+  const withAlt = images.filter((image) => /\balt=["'][^"']+["']/i.test(image)).length;
+  return { total: images.length, withAlt };
+}
+
+function countLinks(html: string, baseUrl: URL) {
+  const hrefs = [...html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>/gi)].map((match) => match[1]);
+  let internal = 0;
+  let external = 0;
+  for (const href of hrefs) {
+    if (/^(mailto:|tel:|#)/i.test(href)) {
+      internal += 1;
+      continue;
+    }
+    try {
+      const url = new URL(href, baseUrl);
+      if (url.hostname === baseUrl.hostname) {
+        internal += 1;
+      } else if (["http:", "https:"].includes(url.protocol)) {
+        external += 1;
+      }
+    } catch {
+      internal += 1;
+    }
+  }
+  return { total: hrefs.length, internal, external };
+}
+
+function extractActionText(html: string) {
+  const matches = [
+    ...html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi),
+    ...html.matchAll(/<button\b[^>]*>([\s\S]*?)<\/button>/gi),
+  ];
+  return matches
+    .map((match) => stripTags(match[1]))
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function stripTags(value: string) {
+  return decodeEntities(value.replace(/<[^>]+>/g, " ")).trim();
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function decodeEntities(value: string) {

@@ -5,6 +5,7 @@ const statusCards = [
   { label: "Check API", value: "Ready", detail: "/api/check accepts one URL per run", tone: "good" },
   { label: "Healthcheck", value: "Online", detail: "/api/health reports app status", tone: "good" },
   { label: "Scan history", value: "Local", detail: "Recent checks are saved in this browser", tone: "good" },
+  { label: "Deep recon", value: "Active", detail: "Headings, images, links, social, robots, sitemap", tone: "good" },
   { label: "Fleet teams", value: "4", detail: "Technical, content, trust, conversion", tone: "good" },
   { label: "Revenue path", value: "Started", detail: "Report sharing and lead request form", tone: "good" },
 ];
@@ -39,7 +40,8 @@ const quickActions = [
 const monitorItems = [
   "Latest production deployment should build from main.",
   "Healthcheck should return status ok.",
-  "Checker scope stays limited to one public HTML page.",
+  "Checker scope stays limited to one public HTML page plus same-origin robots and sitemap files.",
+  "Deep recon checks should return evidence counts instead of guesses.",
   "Recent scans are saved in browser storage until database storage is added.",
   "Lead requests open as email drafts until database storage is added.",
   "Payments are not connected yet.",
@@ -49,10 +51,11 @@ const monitorItems = [
 const roadmap = [
   "Move browser scan history into a shared database.",
   "Add admin-only dashboard access.",
-  "Add deeper crawler checks for headings, links, images, robots, and sitemap.",
-  "Use Ollama locally or a hosted model to draft plain-English recommendations from evidence.",
+  "Add AI-generated action plans from the detected evidence.",
   "Add payment links for full reports and fix plans.",
   "Add phone-friendly uptime and lead alerts.",
+  "Add scheduled rechecks for saved sites.",
+  "Add downloadable branded PDF reports.",
 ];
 
 export default function Dashboard() {
@@ -68,7 +71,8 @@ export default function Dashboard() {
         <div>
           <h1>Fleet dashboard for launch control and monitoring.</h1>
           <p className="intro">
-            Website recon for businesses that need answers fast. Evidence-first scans built for action.
+            Website recon for businesses that need answers fast. Evidence-first scans built for action, follow-up, and
+            a clean path to paid help.
           </p>
         </div>
       </section>
