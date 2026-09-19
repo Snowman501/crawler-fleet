@@ -10,11 +10,13 @@ type Finding = {
   team: string;
   check: string;
   detected: boolean;
+  applicable: boolean;
   evidence: string;
   why_it_matters: string;
+  how_to_fix: string;
 };
 
-type TeamSummary = Record<string, { passed: number; total: number; missing: string[] }>;
+type TeamSummary = Record<string, { passed: number; total: number; missing: string[]; not_applicable: string[] }>;
 
 const checks = [
   {
@@ -22,6 +24,7 @@ const checks = [
     check: "HTTPS at final URL",
     evidence: "final URL scheme",
     why_it_matters: "A secure final URL is table stakes for customer trust and browser compatibility.",
+    how_to_fix: "Redirect all HTTP traffic to HTTPS and use the HTTPS address as the canonical URL.",
     detect: (context: PageContext) => context.url.protocol === "https:",
   },
   {
@@ -29,6 +32,7 @@ const checks = [
     check: "Mobile viewport tag",
     evidence: 'meta[name="viewport"]',
     why_it_matters: "A viewport tag helps the page render correctly on phones.",
+    how_to_fix: 'Add <meta name="viewport" content="width=device-width, initial-scale=1"> inside <head>.',
     detect: (context: PageContext) => hasMetaName(context.html, "viewport"),
   },
   {
@@ -36,6 +40,7 @@ const checks = [
     check: "Canonical URL",
     evidence: 'link[rel="canonical"]',
     why_it_matters: "A canonical URL helps search engines understand the preferred page address.",
+    how_to_fix: 'Add <link rel="canonical" href="https://your-domain.example/preferred-path"> inside <head>.',
     detect: (context: PageContext) => /<link\b[^>]*rel=["'][^"']*\bcanonical\b[^"']*["'][^>]*>/i.test(context.html),
   },
   {
@@ -43,6 +48,7 @@ const checks = [
     check: "Robots file reachable",
     evidence: "/robots.txt",
     why_it_matters: "A robots file gives crawlers basic instructions and can point them toward important content.",
+    how_to_fix: "Publish /robots.txt, allow the public pages you want indexed, and include the sitemap URL.",
     detect: (context: PageContext) => context.originChecks.robots.ok,
     detail: (context: PageContext) => context.originChecks.robots.evidence,
   },
@@ -51,6 +57,7 @@ const checks = [
     check: "Sitemap reachable",
     evidence: "/sitemap.xml",
     why_it_matters: "A sitemap helps search engines discover the important pages faster.",
+    how_to_fix: "Publish /sitemap.xml with canonical public URLs and keep its last-modified dates accurate.",
     detect: (context: PageContext) => context.originChecks.sitemap.ok,
     detail: (context: PageContext) => context.originChecks.sitemap.evidence,
   },
@@ -59,6 +66,7 @@ const checks = [
     check: "Page title",
     evidence: "<title>",
     why_it_matters: "A title helps people and search engines understand the page.",
+    how_to_fix: "Add one specific page title that clearly names the business, service, product, or topic.",
     detect: (context: PageContext) => context.title.length > 0,
   },
   {
@@ -66,6 +74,7 @@ const checks = [
     check: "Meta description",
     evidence: 'meta[name="description"]',
     why_it_matters: "A clear description can improve how the page appears in search results.",
+    how_to_fix: "Add a concise meta description that explains the page and gives the visitor a reason to click.",
     detect: (context: PageContext) => context.description.length > 0,
   },
   {
@@ -73,6 +82,7 @@ const checks = [
     check: "Single H1 heading",
     evidence: "<h1>",
     why_it_matters: "One clear H1 gives visitors and search engines a strong page topic.",
+    how_to_fix: "Use exactly one visible H1 that describes the primary purpose of the page.",
     detect: (context: PageContext) => context.h1Count === 1,
     detail: (context: PageContext) => `H1 count: ${context.h1Count}`,
   },
@@ -81,6 +91,7 @@ const checks = [
     check: "Social preview tags",
     evidence: 'meta[property="og:title"], meta[property="og:description"]',
     why_it_matters: "Social preview tags make shared links look more trustworthy and clickable.",
+    how_to_fix: "Add Open Graph title and description tags; add an image tag when a suitable share image exists.",
     detect: (context: PageContext) =>
       hasMetaProperty(context.html, "og:title") && hasMetaProperty(context.html, "og:description"),
   },
@@ -89,6 +100,8 @@ const checks = [
     check: "Images have alt text",
     evidence: "<img alt>",
     why_it_matters: "Alt text improves accessibility and gives image-heavy pages more readable context.",
+    how_to_fix: "Give each meaningful image concise alt text; use an empty alt attribute for purely decorative images.",
+    applicable: (context: PageContext) => context.imageCount > 0,
     detect: (context: PageContext) => context.imageCount > 0 && context.imagesWithAlt === context.imageCount,
     detail: (context: PageContext) => `${context.imagesWithAlt}/${context.imageCount} images include alt text`,
   },
@@ -97,6 +110,7 @@ const checks = [
     check: "Links present on page",
     evidence: "anchor href values",
     why_it_matters: "Useful links help people continue their path instead of hitting a dead end.",
+    how_to_fix: "Add clear links to the next useful page, action, product, service, or trusted external destination.",
     detect: (context: PageContext) => context.linkCount > 0,
     detail: (context: PageContext) =>
       `${context.internalLinkCount} internal links; ${context.externalLinkCount} external links`,
@@ -106,6 +120,7 @@ const checks = [
     check: "Contact link on inspected page",
     evidence: "anchor href values",
     why_it_matters: "A visible contact path makes the business easier to trust and reach.",
+    how_to_fix: "Add a visible Contact link in the main navigation or footer and point it to a working contact page.",
     detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(contact|mailto:)[^"']*["'][^>]*>/i.test(context.html),
   },
   {
@@ -113,6 +128,7 @@ const checks = [
     check: "About link on inspected page",
     evidence: "anchor href values",
     why_it_matters: "An about path helps visitors quickly understand who is behind the business.",
+    how_to_fix: "Add an About, Company, or Story link that identifies the people or organization behind the site.",
     detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(about|company|story)[^"']*["'][^>]*>/i.test(context.html),
   },
   {
@@ -120,6 +136,7 @@ const checks = [
     check: "Privacy or policy link",
     evidence: "anchor href values",
     why_it_matters: "Policy links are basic trust signals for customers, platforms, and payment reviews.",
+    how_to_fix: "Publish plain-language Privacy and Terms pages and link them from the footer.",
     detect: (context: PageContext) => /<a\b[^>]*href=["'][^"']*(privacy|policy|terms)[^"']*["'][^>]*>/i.test(context.html),
   },
   {
@@ -127,6 +144,7 @@ const checks = [
     check: "Direct email or phone path",
     evidence: "mailto: or tel: link",
     why_it_matters: "A direct contact option lowers friction when someone is ready to ask for help.",
+    how_to_fix: "Add a working mailto: email link, tel: phone link, or both where visitors can find them easily.",
     detect: (context: PageContext) => /<a\b[^>]*href=["'](?:mailto:|tel:)[^"']+["'][^>]*>/i.test(context.html),
   },
   {
@@ -134,6 +152,7 @@ const checks = [
     check: "Form on inspected page",
     evidence: "<form>",
     why_it_matters: "A form can turn visitor interest into a lead or customer request.",
+    how_to_fix: "Add a short form that asks only for the information needed to respond, with spam protection and a privacy notice.",
     detect: (context: PageContext) => /<form\b/i.test(context.html),
   },
   {
@@ -141,6 +160,7 @@ const checks = [
     check: "Call-to-action language",
     evidence: "button and link text",
     why_it_matters: "Clear action language tells visitors what to do next.",
+    how_to_fix: "Use specific action text such as Request a quote, Book a call, Buy the book, or Contact us.",
     detect: (context: PageContext) =>
       /\b(get started|contact|book|schedule|quote|buy|order|subscribe|sign up|request|start|call now)\b/i.test(
         context.visibleActionText,
@@ -151,10 +171,8 @@ const checks = [
     check: "Lead capture path",
     evidence: "form, mailto, tel, or CTA link",
     why_it_matters: "A lead path turns a page from information into a business pipeline.",
-    detect: (context: PageContext) =>
-      /<form\b/i.test(context.html) ||
-      /<a\b[^>]*href=["'](?:mailto:|tel:)[^"']+["'][^>]*>/i.test(context.html) ||
-      /\b(contact|book|schedule|quote|request)\b/i.test(context.visibleActionText),
+    how_to_fix: "Connect the primary call to action to a real form, contact page, booking page, email address, or phone number.",
+    detect: (context: PageContext) => /<form\b/i.test(context.html) || hasActionableLeadLink(context.html),
   },
 ];
 
@@ -184,6 +202,7 @@ type OriginChecks = {
 };
 
 export async function POST(request: Request) {
+  const startedAt = Date.now();
   try {
     const body = (await request.json()) as { url?: unknown };
     if (typeof body.url !== "string") {
@@ -208,12 +227,25 @@ export async function POST(request: Request) {
       visibleActionText: extractActionText(html),
       originChecks,
     };
-    const findings = checks.map<Finding>((check) => ({
-      team: check.team,
-      check: check.check,
-      detected: check.detect(context),
-      evidence: check.detail?.(context) ?? (check.check === "HTTPS at final URL" ? finalUrl.toString() : check.evidence),
-      why_it_matters: check.why_it_matters,
+    const findings = checks.map<Finding>((check) => {
+      const applicable = check.applicable?.(context) ?? true;
+      return {
+        team: check.team,
+        check: check.check,
+        detected: applicable && check.detect(context),
+        applicable,
+        evidence: check.detail?.(context) ?? (check.check === "HTTPS at final URL" ? finalUrl.toString() : check.evidence),
+        why_it_matters: check.why_it_matters,
+        how_to_fix: check.how_to_fix,
+      };
+    });
+
+    console.log(JSON.stringify({
+      level: "info",
+      msg: "website check completed",
+      route: "/api/check",
+      host: finalUrl.hostname,
+      ms: Date.now() - startedAt,
     }));
 
     return Response.json({
@@ -227,6 +259,13 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "The check failed.";
+    console.error(JSON.stringify({
+      level: "error",
+      msg: "website check failed",
+      route: "/api/check",
+      error: message,
+      ms: Date.now() - startedAt,
+    }));
     return Response.json({ error: message }, { status: 400 });
   }
 }
@@ -235,9 +274,9 @@ async function fetchHtml(input: string) {
   let currentUrl = validateUrl(input);
   for (let redirectCount = 0; redirectCount < REDIRECT_LIMIT; redirectCount += 1) {
     await assertPublicHostname(currentUrl);
-    const response = await fetch(currentUrl, {
+    const response = await fetchWithRetry(currentUrl, {
       redirect: "manual",
-      headers: { "User-Agent": "CrawlerFleet/0.2 (+website checkup; contact site owner)" },
+      headers: { "User-Agent": "CrawlerFleet/0.7 (+https://questforgeai.vercel.app; evidence-based website checkup)" },
       signal: AbortSignal.timeout(10_000),
     });
 
@@ -276,9 +315,9 @@ async function checkOriginResource(baseUrl: URL, pathname: string): Promise<Orig
   const resourceUrl = validateUrl(new URL(pathname, baseUrl.origin).toString());
   try {
     await assertPublicHostname(resourceUrl);
-    const response = await fetch(resourceUrl, {
+    const response = await fetchWithRetry(resourceUrl, {
       redirect: "manual",
-      headers: { "User-Agent": "CrawlerFleet/0.4 (+website recon; contact site owner)" },
+      headers: { "User-Agent": "CrawlerFleet/0.7 (+https://questforgeai.vercel.app; evidence-based website checkup)" },
       signal: AbortSignal.timeout(8_000),
     });
     await response.body?.cancel();
@@ -424,6 +463,36 @@ function extractActionText(html: string) {
     .trim();
 }
 
+function hasActionableLeadLink(html: string) {
+  const hrefs = [...html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>/gi)].map((match) => match[1]);
+  return hrefs.some((href) => {
+    if (/^(mailto:|tel:)/i.test(href)) {
+      return true;
+    }
+    try {
+      const path = new URL(href, "https://crawler-fleet.invalid").pathname;
+      return /\/(contact|book|booking|schedule|quote|request|appointment|reservation|order|cart|checkout)(?:\/|$)/i.test(path);
+    } catch {
+      return false;
+    }
+  });
+}
+
+async function fetchWithRetry(url: URL, init: RequestInit) {
+  const retryableStatuses = new Set([429, 502, 503, 504]);
+  let response = await fetch(url, init);
+  if (!retryableStatuses.has(response.status)) {
+    return response;
+  }
+
+  await response.body?.cancel();
+  const retryAfter = Number(response.headers.get("retry-after"));
+  const delayMs = Number.isFinite(retryAfter) ? Math.min(retryAfter * 1_000, 2_000) : 500;
+  await new Promise((resolve) => setTimeout(resolve, delayMs));
+  response = await fetch(url, init);
+  return response;
+}
+
 function stripTags(value: string) {
   return decodeEntities(value.replace(/<[^>]+>/g, " ")).trim();
 }
@@ -443,11 +512,14 @@ function decodeEntities(value: string) {
 
 function summarizeByTeam(findings: Finding[]) {
   return findings.reduce<TeamSummary>((summary, finding) => {
-    summary[finding.team] ??= { passed: 0, total: 0, missing: [] };
-    summary[finding.team].total += 1;
-    if (finding.detected) {
+    summary[finding.team] ??= { passed: 0, total: 0, missing: [], not_applicable: [] };
+    if (!finding.applicable) {
+      summary[finding.team].not_applicable.push(finding.check);
+    } else if (finding.detected) {
+      summary[finding.team].total += 1;
       summary[finding.team].passed += 1;
     } else {
+      summary[finding.team].total += 1;
       summary[finding.team].missing.push(finding.check);
     }
     return summary;

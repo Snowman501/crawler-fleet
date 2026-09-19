@@ -9,8 +9,10 @@ type Finding = {
   team: string;
   check: string;
   detected: boolean;
+  applicable: boolean;
   evidence: string;
   why_it_matters: string;
+  how_to_fix: string;
 };
 
 type Report = {
@@ -19,7 +21,10 @@ type Report = {
   scope: string;
   title: string;
   description: string;
-  team_summary: Record<string, { passed: number; total: number; missing: string[] }>;
+  team_summary: Record<
+    string,
+    { passed: number; total: number; missing: string[]; not_applicable?: string[] }
+  >;
   findings: Finding[];
 };
 
@@ -44,11 +49,12 @@ function formatReport(report: Report) {
     return `- ${teamLabels[team] ?? team}: ${summary.passed}/${summary.total} detected; missing: ${missing}`;
   });
   const findingLines = report.findings.map((finding) => {
-    const status = finding.detected ? "Detected" : "Not detected";
+    const status = !finding.applicable ? "Not applicable" : finding.detected ? "Detected" : "Not detected";
     return [
       `- [${teamLabels[finding.team] ?? finding.team}] ${finding.check}: ${status}`,
       `  Evidence checked: ${finding.evidence}`,
       `  Why it matters: ${finding.why_it_matters}`,
+      ...(!finding.applicable || finding.detected ? [] : [`  How to fix it: ${finding.how_to_fix}`]),
     ].join("\n");
   });
 
@@ -114,11 +120,25 @@ export default function Home() {
     setReport(null);
 
     try {
-      const response = await fetch("/api/check", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
-      });
+      let response: Response | undefined;
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        try {
+          response = await fetch("/api/check", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+          });
+          break;
+        } catch (networkError) {
+          if (attempt === 1) {
+            throw networkError;
+          }
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      }
+      if (!response) {
+        throw new Error("The scanner could not reach its API. Refresh the page and try once more.");
+      }
       const payload = await response.json();
       if (!response.ok) {
         throw new Error(payload.error ?? "The check failed.");
@@ -128,7 +148,12 @@ export default function Home() {
       setLeadForm((current) => ({ ...current, website: payload.url }));
       setCopyStatus("");
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "The check failed.");
+      const message = caught instanceof Error ? caught.message : "The check failed.";
+      setError(
+        message === "NetworkError when attempting to fetch resource."
+          ? "The browser briefly lost the scanner connection. Refresh the page or disable blocking for this site, then try again."
+          : message,
+      );
     } finally {
       setLoading(false);
     }
@@ -377,13 +402,16 @@ export default function Home() {
             {report.findings.map((finding) => (
               <article className="finding" key={`${finding.team}-${finding.check}`}>
                 <div>
-                  <span className={finding.detected ? "status good" : "status warn"}>
-                    {finding.detected ? "Detected" : "Not detected"}
+                  <span className={!finding.applicable ? "status neutral" : finding.detected ? "status good" : "status warn"}>
+                    {!finding.applicable ? "Not applicable" : finding.detected ? "Detected" : "Not detected"}
                   </span>
                   <h3>{finding.check}</h3>
                 </div>
                 <p>{finding.why_it_matters}</p>
                 <p className="evidence">Evidence checked: {finding.evidence}</p>
+                {finding.applicable && !finding.detected ? (
+                  <p className="fix"><strong>How to fix it:</strong> {finding.how_to_fix}</p>
+                ) : null}
               </article>
             ))}
           </div>
