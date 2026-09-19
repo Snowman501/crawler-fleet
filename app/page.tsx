@@ -60,7 +60,12 @@ export default function Home() {
   return (
     <main className="shell">
       <section className="hero">
-        <p className="eyebrow">Crawler Fleet</p>
+        <div className="topbar">
+          <p className="eyebrow">Crawler Fleet</p>
+          <a className="nav-link" href="/dashboard">
+            Dashboard
+          </a>
+        </div>
         <h1>Website checkups from a small, evidence-first agent team.</h1>
         <p className="intro">
           Run a safe one-page scan for technical, content, trust, and conversion basics. Every result shows what was checked
