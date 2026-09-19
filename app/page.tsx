@@ -148,10 +148,10 @@ export default function Home() {
             Dashboard
           </a>
         </div>
-        <h1>Website checkups from a small, evidence-first agent team.</h1>
+        <h1>Rough checks. Clean evidence. No guesswork.</h1>
         <p className="intro">
-          Run a safe one-page scan for technical, content, trust, and conversion basics. Every result shows what was checked
-          and stays scoped to the inspected page.
+          One page in. A battle plan out. Run a safe website recon scan for technical, content, trust, and conversion
+          basics.
         </p>
         <form className="check-form" onSubmit={runCheck}>
           <label htmlFor="url">Website URL</label>

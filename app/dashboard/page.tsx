@@ -1,8 +1,9 @@
 const statusCards = [
   { label: "Public app", value: "Live", detail: "questforgeai.vercel.app", tone: "good" },
   { label: "Check API", value: "Ready", detail: "/api/check accepts one URL per run", tone: "good" },
+  { label: "Healthcheck", value: "Online", detail: "/api/health reports app status", tone: "good" },
   { label: "Fleet teams", value: "4", detail: "Technical, content, trust, conversion", tone: "good" },
-  { label: "Revenue path", value: "Next", detail: "Add report download and lead capture", tone: "warn" },
+  { label: "Revenue path", value: "Started", detail: "Report sharing and lead request form", tone: "good" },
 ];
 
 const quickActions = [
@@ -19,6 +20,12 @@ const quickActions = [
     action: "Open live site",
   },
   {
+    title: "Healthcheck",
+    description: "Read the live app status response used for quick monitoring.",
+    href: "/api/health",
+    action: "Open health",
+  },
+  {
     title: "GitHub repo",
     description: "Review the code, commits, and future fleet upgrades.",
     href: "https://github.com/Snowman501/crawler-fleet",
@@ -28,19 +35,20 @@ const quickActions = [
 
 const monitorItems = [
   "Latest production deployment should build from main.",
+  "Healthcheck should return status ok.",
   "Checker scope stays limited to one public HTML page.",
-  "Lead capture is not active yet.",
+  "Lead requests open as email drafts until database storage is added.",
   "Payments are not connected yet.",
   "Ollama/AI recommendations are planned, not active.",
 ];
 
 const roadmap = [
-  "Add copy/download report buttons.",
-  "Add lead form for name, email, website, and requested help.",
   "Save scan history in a database.",
   "Add admin-only dashboard access.",
   "Add deeper crawler checks for headings, links, images, robots, and sitemap.",
   "Use Ollama locally or a hosted model to draft plain-English recommendations from evidence.",
+  "Add payment links for full reports and fix plans.",
+  "Add phone-friendly uptime and lead alerts.",
 ];
 
 export default function Dashboard() {
@@ -56,7 +64,7 @@ export default function Dashboard() {
         <div>
           <h1>Fleet dashboard for launch control and monitoring.</h1>
           <p className="intro">
-            A mobile-friendly command center for what is live now, what needs attention, and what we build next.
+            Website recon for businesses that need answers fast. Evidence-first scans built for action.
           </p>
         </div>
       </section>
