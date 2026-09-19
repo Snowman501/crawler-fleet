@@ -9,6 +9,16 @@ python fleet.py https://example.com --output report.json --text-output report.tx
 python -m unittest discover -s tests
 ```
 
+The repo also includes a small Next.js web app for Vercel:
+
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+The web app exposes `/` for a browser checkup form and `/api/check` for the JSON checkup endpoint.
+
 `crawler.py` is the original local-business prototype; its old scores and outreach drafts are not validated. `fleet.py` does not depend on Ollama. It records the final URL, timestamp, page title, description, team summaries, and six narrowly scoped checks. A request failure produces no speculative report.
 
 The current fleet teams are:

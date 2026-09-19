@@ -1,5 +1,12 @@
-venv/
-.env
-*.swp
-*.pyc
+node_modules/
+.next/
+out/
 __pycache__/
+*.py[cod]
+report.json
+report.txt
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
