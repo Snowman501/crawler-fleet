@@ -38,6 +38,12 @@ const quickActions = [
     action: "Open status",
   },
   {
+    title: "Trust Center",
+    description: "Review security posture, public-scan policy, and verification links.",
+    href: "/trust-center",
+    action: "Open trust",
+  },
+  {
     title: "GitHub repo",
     description: "Review the code, commits, and future fleet upgrades.",
     href: "https://github.com/Snowman501/crawler-fleet",

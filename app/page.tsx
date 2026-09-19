@@ -59,7 +59,7 @@ function formatReport(report: Report) {
   });
 
   return [
-    "Crawler Fleet Website Checkup",
+    "SL NextGen Web Intel Website Checkup",
     `URL: ${report.url}`,
     `Checked: ${new Date(report.checked_at).toLocaleString()}`,
     `Title: ${report.title || "Untitled page"}`,
@@ -231,7 +231,7 @@ export default function Home() {
     <main className="shell">
       <section className="hero">
         <div className="topbar">
-          <p className="eyebrow">Crawler Fleet</p>
+          <p className="eyebrow">SL NextGen Web Intel</p>
           <a className="nav-link" href="/dashboard">
             Dashboard
           </a>
@@ -296,13 +296,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="trust-strip" aria-label="Crawler Fleet business information">
+      <section className="trust-strip" aria-label="SL NextGen Web Intel trust information">
         <div>
           <p className="eyebrow">Before You Buy</p>
           <h2>Clear path. Written request. No pressure.</h2>
           <p>
-            Crawler Fleet is built so a business can scan a page, understand the evidence, and request help in writing
-            before paying for a bigger fix.
+            SL NextGen Web Intel is built so a business can scan a page, understand the evidence, and request help in
+            writing before paying for a bigger fix.
           </p>
         </div>
         <div className="trust-links">
@@ -320,6 +320,9 @@ export default function Home() {
           </a>
           <a className="nav-link" href="/terms">
             Terms
+          </a>
+          <a className="nav-link" href="/trust-center">
+            Trust Center
           </a>
         </div>
       </section>

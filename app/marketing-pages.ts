@@ -14,7 +14,7 @@ export const marketingPages: MarketingPage[] = [
   {
     slug: "contact",
     eyebrow: "Contact",
-    title: "Contact Crawler Fleet",
+    title: "Contact SL NextGen Web Intel",
     description:
       "Request website checkup help by running a scan and sending the report through the fix-plan form.",
     primaryCta: "Run a checkup",
@@ -25,11 +25,11 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "No phone-first pressure",
-        body: "Crawler Fleet is built for written requests. Send the report, website URL, and what you want help with.",
+        body: "SL NextGen Web Intel is built for written requests. Send the report, website URL, and what you want help with.",
       },
       {
         title: "Business identity",
-        body: "Crawler Fleet is a project of SL NextGen Global, operated by Loren J. Barnhart Jr. as a sole proprietor unless a formal entity is added later.",
+        body: "SL NextGen Web Intel is a project of SL NextGen Global, operated by Loren J. Barnhart Jr. as a sole proprietor unless a formal entity is added later.",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Privacy",
     title: "Privacy and data use",
     description:
-      "A plain-English privacy note for Crawler Fleet website scans, lead requests, analytics, and report handling.",
+      "A plain-English privacy note for SL NextGen Web Intel website scans, lead requests, analytics, and report handling.",
     primaryCta: "Run a checkup",
     sections: [
       {
@@ -60,7 +60,7 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Terms",
     title: "Terms and scan disclaimer",
     description:
-      "Crawler Fleet provides informational website checkups and practical fix-plan services without guaranteeing rankings, traffic, sales, or approvals.",
+      "SL NextGen Web Intel provides informational website checkups and practical fix-plan services without guaranteeing rankings, traffic, sales, or approvals.",
     primaryCta: "Run a checkup",
     sections: [
       {
@@ -69,7 +69,7 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "No guarantees",
-        body: "Crawler Fleet does not guarantee search rankings, sales, leads, payment processor approval, legal compliance, accessibility compliance, or business results.",
+        body: "SL NextGen Web Intel does not guarantee search rankings, sales, leads, payment processor approval, legal compliance, accessibility compliance, or business results.",
       },
       {
         title: "Paid work",
@@ -80,14 +80,14 @@ export const marketingPages: MarketingPage[] = [
   {
     slug: "how-it-works",
     eyebrow: "How It Works",
-    title: "How Crawler Fleet turns a scan into a fix plan",
+    title: "How SL NextGen Web Intel turns a scan into a fix plan",
     description:
       "Run a free scan, review the missing evidence, choose a fixed next step, and submit the report for a written fix plan.",
     primaryCta: "Start the workflow",
     sections: [
       {
         title: "1. Run the free scan",
-        body: "Paste one public website URL and let Crawler Fleet check technical, content, trust, and conversion basics.",
+        body: "Paste one public website URL and let SL NextGen Web Intel check technical, content, trust, and conversion basics.",
       },
       {
         title: "2. Read the report",
@@ -104,7 +104,7 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Example Report",
     title: "Example website report: technically strong, trust path missing",
     description:
-      "A sample explanation of how to read a Crawler Fleet report and decide what to fix first.",
+      "A sample explanation of how to read an SL NextGen Web Intel report and decide what to fix first.",
     primaryCta: "Run your own report",
     sections: [
       {
@@ -126,7 +126,7 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Launch Promo",
     title: "Launch promo website checkups for early users",
     description:
-      "Try the free scanner, then request a discounted first-pass review while Crawler Fleet is launching.",
+      "Try the free scanner, then request a discounted first-pass review while SL NextGen Web Intel is launching.",
     primaryCta: "Claim launch promo",
     sections: [
       {
@@ -197,7 +197,7 @@ export const marketingPages: MarketingPage[] = [
     sections: [
       {
         title: "What gets checked",
-        body: "Crawler Fleet looks for technical basics, content structure, trust markers, and conversion paths on the inspected page.",
+        body: "SL NextGen Web Intel looks for technical basics, content structure, trust markers, and conversion paths on the inspected page.",
       },
       {
         title: "What you get",
@@ -267,7 +267,7 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "CTA language",
-        body: "Crawler Fleet looks for action words like contact, book, schedule, request, quote, get started, and call now.",
+        body: "SL NextGen Web Intel looks for action words like contact, book, schedule, request, quote, get started, and call now.",
       },
       {
         title: "From report to request",
@@ -280,7 +280,7 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Examples",
     title: "Example website checkup reports",
     description:
-      "See how Crawler Fleet turns one inspected page into a clear list of missing technical, content, trust, and conversion signals.",
+      "See how SL NextGen Web Intel turns one inspected page into a clear list of missing technical, content, trust, and conversion signals.",
     primaryCta: "Run a sample check",
     sections: [
       {
@@ -425,7 +425,7 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "Simple first pass",
-        body: "Crawler Fleet does not replace a full store audit, but it shows obvious page-level gaps fast.",
+        body: "SL NextGen Web Intel does not replace a full store audit, but it shows obvious page-level gaps fast.",
       },
     ],
   },
@@ -498,9 +498,9 @@ export const marketingPages: MarketingPage[] = [
   {
     slug: "about",
     eyebrow: "About",
-    title: "Evidence-first website recon by Crawler Fleet",
+    title: "Evidence-first website intelligence by SL NextGen Web Intel",
     description:
-      "Crawler Fleet is a small website analysis system built to help small businesses find practical website problems fast.",
+      "SL NextGen Web Intel is a website intelligence system powered by Crawler Fleet built to help small businesses find practical website problems fast.",
     primaryCta: "Use the scanner",
     sections: [
       {

@@ -1,6 +1,6 @@
 {
-  "name": "SL NextGen Audit",
-  "short_name": "NextGen Audit",
+  "name": "SL NextGen Web Intel",
+  "short_name": "NextGen Intel",
   "description": "Evidence-first website checkups for trust, search, leads, and launch readiness. Powered by Crawler Fleet.",
   "start_url": "/",
   "scope": "/",
@@ -28,8 +28,15 @@
     {
       "name": "System Status",
       "short_name": "Status",
-      "description": "View SL NextGen Audit system status.",
+      "description": "View SL NextGen Web Intel system status.",
       "url": "/status",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Trust Center",
+      "short_name": "Trust",
+      "description": "Review safety posture, scan limits, and verification links.",
+      "url": "/trust-center",
       "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ]

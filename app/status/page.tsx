@@ -5,13 +5,14 @@ const systems = [
   { label: "Deep Recon", value: "Active", detail: "Checks headings, images, links, social tags, robots, and sitemap.", tone: "good" },
   { label: "Last Deployment", value: "Live", detail: "Production deploy is aliased to questforgeai.vercel.app.", tone: "good" },
   { label: "Health API", value: "OK", detail: "/api/health returns machine-readable system status.", tone: "good" },
+  { label: "Trust Center", value: "Live", detail: "Security posture, scan limits, and verification links are public.", tone: "good" },
 ];
 
 const installPaths = [
   {
     title: "Web App",
     status: "Live now",
-    detail: "Use SL NextGen Audit directly in the browser from any device. No download required.",
+    detail: "Use SL NextGen Web Intel directly in the browser from any device. No download required.",
     action: "Open scanner",
     href: "/",
   },
@@ -51,15 +52,15 @@ export default function StatusPage() {
     <main className="shell status-shell">
       <section className="dashboard-hero">
         <div className="topbar">
-          <p className="eyebrow">SL NextGen Audit Status</p>
+          <p className="eyebrow">SL NextGen Web Intel Status</p>
           <a className="nav-link" href="/">
             Scanner
           </a>
         </div>
         <div>
-          <h1>Live system status for the website audit engine.</h1>
+          <h1>Live system status for the website intelligence engine.</h1>
           <p className="intro">
-            Crawler Fleet powers the scan engine under SL NextGen Audit. This page shows what is online, what is ready,
+            Crawler Fleet powers the scan engine under SL NextGen Web Intel. This page shows what is online, what is ready,
             and how businesses can use the scanner from web, phone, Windows, and Linux.
           </p>
         </div>
@@ -73,9 +74,14 @@ export default function StatusPage() {
             The public scanner, dashboard, deep recon checks, lead request path, trust pages, and health API are active.
           </p>
         </div>
-        <a className="button-link" href="/api/health">
-          View JSON health
-        </a>
+        <div className="promo-actions">
+          <a className="button-link" href="/api/health">
+            View JSON health
+          </a>
+          <a className="nav-link" href="/trust-center">
+            Trust Center
+          </a>
+        </div>
       </section>
 
       <section className="dashboard-grid" aria-label="System status">
@@ -119,7 +125,7 @@ export default function StatusPage() {
       <section className="install-help">
         <div>
           <p className="eyebrow">Install App</p>
-          <h2>Add SL NextGen Audit to a phone.</h2>
+          <h2>Add SL NextGen Web Intel to a phone.</h2>
           <p>
             On Samsung Internet or Chrome, open the site menu and choose <strong>Add page to</strong> or{" "}
             <strong>Add to Home screen</strong>. On iPhone Safari, use Share, then <strong>Add to Home Screen</strong>.

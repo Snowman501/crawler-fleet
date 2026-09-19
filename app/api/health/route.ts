@@ -24,7 +24,7 @@ export async function GET() {
 
   return Response.json({
     status: "ok",
-    brand: "SL NextGen Audit",
+    brand: "SL NextGen Web Intel",
     service: "crawler-fleet",
     engine: "Crawler Fleet",
     version: "0.7.0",
@@ -50,6 +50,7 @@ export async function GET() {
       scanner: "ready",
       dashboard: "ready",
       deep_recon: "ready",
+      trust_center: "ready",
       lead_inbox: leadInboxConfigured ? "github-ready" : "fallback-ready",
       payment_links: paymentsConfigured ? "configured" : "not-configured",
       ai_action_plans: "planned",
@@ -60,6 +61,7 @@ export async function GET() {
       status: "/status",
       health: "/api/health",
       leads: "/api/leads",
+      trust_center: "/trust-center",
       pricing: "/pricing",
       privacy: "/privacy",
       terms: "/terms",
@@ -70,6 +72,7 @@ export async function GET() {
       custom_ports: "blocked",
       credentials_in_url: "blocked",
       protected_pages: "not scanned",
+      secrets: "do not submit passwords, payment cards, private dashboards, or sensitive personal data",
     },
     installs: {
       web: "ready",

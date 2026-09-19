@@ -4,10 +4,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://questforgeai.vercel.app"),
-  title: "SL NextGen Audit | Website Checkups",
+  title: "SL NextGen Web Intel | Website Checkups",
   description:
     "Evidence-first website checkups for small business SEO, trust signals, lead capture, and launch readiness. Powered by Crawler Fleet.",
-  applicationName: "SL NextGen Audit",
+  applicationName: "SL NextGen Web Intel",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: "/icon.svg",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "SL NextGen Audit",
+    title: "SL NextGen Web Intel",
     statusBarStyle: "default",
   },
 };

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
   return {
-    title: `${page.title} | Crawler Fleet`,
+    title: `${page.title} | SL NextGen Web Intel`,
     description: page.description,
   };
 }
