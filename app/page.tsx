@@ -296,6 +296,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="trust-strip" aria-label="Crawler Fleet business information">
+        <div>
+          <p className="eyebrow">Before You Buy</p>
+          <h2>Clear path. Written request. No pressure.</h2>
+          <p>
+            Crawler Fleet is built so a business can scan a page, understand the evidence, and request help in writing
+            before paying for a bigger fix.
+          </p>
+        </div>
+        <div className="trust-links">
+          <a className="nav-link" href="/how-it-works">
+            How it works
+          </a>
+          <a className="nav-link" href="/example-report">
+            Example report
+          </a>
+          <a className="nav-link" href="/contact">
+            Contact
+          </a>
+          <a className="nav-link" href="/privacy">
+            Privacy
+          </a>
+          <a className="nav-link" href="/terms">
+            Terms
+          </a>
+        </div>
+      </section>
+
       {report ? (
         <section className="report" aria-live="polite">
           <div className="report-head">
@@ -426,15 +454,15 @@ export default function Home() {
               </p>
             </div>
             <form className="lead-form" onSubmit={submitLeadRequest}>
-              <label className="hidden-field" aria-hidden="true">
-                Company
-                <input
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={leadForm.company}
-                  onChange={(event) => setLeadForm({ ...leadForm, company: event.target.value })}
-                />
-              </label>
+              <input
+                className="hidden-field"
+                aria-hidden="true"
+                tabIndex={-1}
+                autoComplete="off"
+                name="company"
+                value={leadForm.company}
+                onChange={(event) => setLeadForm({ ...leadForm, company: event.target.value })}
+              />
               <div className="form-grid">
                 <label>
                   Name

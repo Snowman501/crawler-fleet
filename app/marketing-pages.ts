@@ -12,6 +12,116 @@ export type MarketingPage = {
 
 export const marketingPages: MarketingPage[] = [
   {
+    slug: "contact",
+    eyebrow: "Contact",
+    title: "Contact Crawler Fleet",
+    description:
+      "Request website checkup help by running a scan and sending the report through the fix-plan form.",
+    primaryCta: "Run a checkup",
+    sections: [
+      {
+        title: "Best way to start",
+        body: "Run the free scanner first. The report gives both sides a clear starting point before any paid work begins.",
+      },
+      {
+        title: "No phone-first pressure",
+        body: "Crawler Fleet is built for written requests. Send the report, website URL, and what you want help with.",
+      },
+      {
+        title: "Business identity",
+        body: "Crawler Fleet is a project of SL NextGen Global, operated by Loren J. Barnhart Jr. as a sole proprietor unless a formal entity is added later.",
+      },
+    ],
+  },
+  {
+    slug: "privacy",
+    eyebrow: "Privacy",
+    title: "Privacy and data use",
+    description:
+      "A plain-English privacy note for Crawler Fleet website scans, lead requests, analytics, and report handling.",
+    primaryCta: "Run a checkup",
+    sections: [
+      {
+        title: "What the scanner checks",
+        body: "The scanner fetches the public URL you enter and same-origin public files like robots.txt and sitemap.xml. It does not log into private accounts or scan protected pages.",
+      },
+      {
+        title: "Lead requests",
+        body: "If you submit a fix-plan request, the form may include your name, email, website, message, and report text so the request can be reviewed.",
+      },
+      {
+        title: "Analytics",
+        body: "The site may use Vercel analytics and deployment logs to understand traffic, uptime, errors, and general usage. Do not submit secrets, passwords, or private URLs.",
+      },
+    ],
+  },
+  {
+    slug: "terms",
+    eyebrow: "Terms",
+    title: "Terms and scan disclaimer",
+    description:
+      "Crawler Fleet provides informational website checkups and practical fix-plan services without guaranteeing rankings, traffic, sales, or approvals.",
+    primaryCta: "Run a checkup",
+    sections: [
+      {
+        title: "Informational results",
+        body: "Reports are based on one public page and selected public files. Missing evidence on one page does not prove a feature is absent from the entire website.",
+      },
+      {
+        title: "No guarantees",
+        body: "Crawler Fleet does not guarantee search rankings, sales, leads, payment processor approval, legal compliance, accessibility compliance, or business results.",
+      },
+      {
+        title: "Paid work",
+        body: "Paid services begin after payment or approval is confirmed. Fixed-price offers are scoped to the described review, plan, or cleanup and may require a separate quote for larger work.",
+      },
+    ],
+  },
+  {
+    slug: "how-it-works",
+    eyebrow: "How It Works",
+    title: "How Crawler Fleet turns a scan into a fix plan",
+    description:
+      "Run a free scan, review the missing evidence, choose a fixed next step, and submit the report for a written fix plan.",
+    primaryCta: "Start the workflow",
+    sections: [
+      {
+        title: "1. Run the free scan",
+        body: "Paste one public website URL and let Crawler Fleet check technical, content, trust, and conversion basics.",
+      },
+      {
+        title: "2. Read the report",
+        body: "Start with trust, then search basics, then lead capture. The report shows what was detected and what needs attention.",
+      },
+      {
+        title: "3. Request help",
+        body: "Choose a fixed next step like Quick Fix Review or Website Action Plan. Payment links can be connected when the payment account is ready.",
+      },
+    ],
+  },
+  {
+    slug: "example-report",
+    eyebrow: "Example Report",
+    title: "Example website report: technically strong, trust path missing",
+    description:
+      "A sample explanation of how to read a Crawler Fleet report and decide what to fix first.",
+    primaryCta: "Run your own report",
+    sections: [
+      {
+        title: "Strong technical foundation",
+        body: "A site can pass HTTPS, mobile viewport, canonical, robots.txt, sitemap.xml, titles, descriptions, headings, and social preview checks.",
+      },
+      {
+        title: "Trust gaps still matter",
+        body: "Even a strong site can miss contact links, privacy/policy links, direct email or phone paths, or a visible form on the inspected page.",
+      },
+      {
+        title: "The fix order",
+        body: "Add trust paths first, then improve search details, then strengthen lead capture. That order helps avoid spending money before the basics are ready.",
+      },
+    ],
+  },
+  {
     slug: "launch-promo",
     eyebrow: "Launch Promo",
     title: "Launch promo website checkups for early users",
