@@ -12,6 +12,50 @@ export type MarketingPage = {
 
 export const marketingPages: MarketingPage[] = [
   {
+    slug: "launch-promo",
+    eyebrow: "Launch Promo",
+    title: "Launch promo website checkups for early users",
+    description:
+      "Try the free scanner, then request a discounted first-pass review while Crawler Fleet is launching.",
+    primaryCta: "Claim launch promo",
+    sections: [
+      {
+        title: "Free scan first",
+        body: "Run the public checker before paying for anything. The report shows what was detected and what needs attention.",
+      },
+      {
+        title: "Launch review",
+        body: "Early users can request a quick fix review based on the report so they know the highest-impact next steps.",
+      },
+      {
+        title: "No pressure path",
+        body: "If the scan does not show anything worth fixing, keep the report and move on. Paid help starts only when a business chooses it.",
+      },
+    ],
+  },
+  {
+    slug: "what-to-do-next",
+    eyebrow: "Help",
+    title: "What to do after your website checkup",
+    description:
+      "A simple guide for business owners who ran a scan but are not sure which missing items matter first.",
+    primaryCta: "Run a checkup",
+    sections: [
+      {
+        title: "Start with trust",
+        body: "If contact, about, privacy, email, phone, or policy paths are missing, fix those before spending money on traffic.",
+      },
+      {
+        title: "Then fix search basics",
+        body: "Titles, meta descriptions, headings, social preview tags, robots.txt, and sitemap.xml help people and crawlers understand the page.",
+      },
+      {
+        title: "Then fix lead capture",
+        body: "If the page has no form, phone link, email link, or clear call to action, visitors may leave without knowing what to do.",
+      },
+    ],
+  },
+  {
     slug: "free-website-checker",
     eyebrow: "Free Tool",
     title: "Free website checker for small businesses",

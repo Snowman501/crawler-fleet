@@ -237,6 +237,25 @@ export default function Home() {
 
       {error ? <p className="error">{error}</p> : null}
 
+      <section className="promo-panel">
+        <div>
+          <p className="eyebrow">Launch Promo</p>
+          <h2>Not sure what your report means?</h2>
+          <p>
+            Run the free check first. If the report shows missing trust, search, or lead-capture basics, request a
+            launch review and get the highest-impact fixes listed in plain English.
+          </p>
+        </div>
+        <div className="promo-actions">
+          <a className="button-link" href="/launch-promo">
+            View launch promo
+          </a>
+          <a className="nav-link" href="/what-to-do-next">
+            What to do next
+          </a>
+        </div>
+      </section>
+
       <section className="service-strip" aria-label="Free website tools">
         <div className="section-head">
           <p className="eyebrow">Free Services</p>
@@ -313,6 +332,33 @@ export default function Home() {
             <p className="panel-copy">
               Payment buttons appear here automatically after payment links are added in Vercel.
             </p>
+          </section>
+
+          <section className="next-step-panel">
+            <div className="section-head">
+              <p className="eyebrow">Not Sure?</p>
+              <h2>Fix in this order.</h2>
+            </div>
+            <div className="step-grid">
+              <article>
+                <span>1</span>
+                <h3>Trust</h3>
+                <p>Fix contact, about, privacy, email, phone, and policy paths before buying traffic.</p>
+              </article>
+              <article>
+                <span>2</span>
+                <h3>Search</h3>
+                <p>Then handle titles, descriptions, headings, social tags, robots.txt, and sitemap.xml.</p>
+              </article>
+              <article>
+                <span>3</span>
+                <h3>Leads</h3>
+                <p>Then make the next step obvious with a form, phone link, email link, or clear CTA.</p>
+              </article>
+            </div>
+            <a className="nav-link" href="/what-to-do-next">
+              Read the simple guide
+            </a>
           </section>
 
           <div className="summary-grid">

@@ -242,6 +242,60 @@ time {
   font-weight: 800;
 }
 
+.promo-panel,
+.next-step-panel {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+}
+
+.promo-panel {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.promo-panel p,
+.next-step-panel p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.step-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+
+.step-grid span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 12px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+}
+
 .service-strip {
   display: grid;
   gap: 16px;
@@ -687,6 +741,8 @@ time {
   .service-grid,
   .marketing-grid,
   .offer-grid,
+  .promo-panel,
+  .step-grid,
   .lead-panel,
   .form-grid {
     grid-template-columns: 1fr;
@@ -725,6 +781,10 @@ time {
 
   .action-card span {
     width: fit-content;
+  }
+
+  .promo-actions {
+    display: grid;
   }
 
   .split-head,
