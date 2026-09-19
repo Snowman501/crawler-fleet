@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMarketingPage, marketingPages } from "../marketing-pages";
-import { serviceOffers } from "../service-offers";
+import { getPaymentLink, serviceOffers } from "../service-offers";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -74,18 +74,21 @@ export default async function MarketingPage({ params }: PageProps) {
         </p>
         <div className="offer-grid">
           {serviceOffers.map((offer) => (
-            <article className="offer-card" key={offer.name}>
+            <article className="offer-card" key={offer.id}>
               <div>
                 <p className="offer-price">{offer.price}</p>
                 <h3>{offer.name}</h3>
                 <p>{offer.promise}</p>
               </div>
-              <a className="button-link" href={`/?service=${encodeURIComponent(offer.name)}`}>
-                {page.slug === "pricing" ? "Start request" : "Request this"}
+              <a className="button-link" href={getPaymentLink(offer.id) || `/?service=${encodeURIComponent(offer.name)}`}>
+                {getPaymentLink(offer.id) ? "Pay and request" : page.slug === "pricing" ? "Start request" : "Request this"}
               </a>
             </article>
           ))}
         </div>
+        <p className="panel-copy">
+          Payment buttons activate automatically when payment links are added to the production environment.
+        </p>
       </section>
     </main>
   );

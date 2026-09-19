@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { saveScanHistoryItem, summarizeReportForHistory } from "./lib/scan-history";
 import { marketingPages } from "./marketing-pages";
-import { serviceOffers } from "./service-offers";
+import { getPaymentLink, serviceOffers } from "./service-offers";
 
 type Finding = {
   team: string;
@@ -282,28 +282,37 @@ export default function Home() {
             </div>
             <div className="offer-grid">
               {serviceOffers.slice(0, 4).map((offer) => (
-                <article className="offer-card" key={offer.name}>
+                <article className="offer-card" key={offer.id}>
                   <div>
                     <p className="offer-price">{offer.price}</p>
                     <h3>{offer.name}</h3>
                     <p>{offer.promise}</p>
                   </div>
-                  <button
-                    className="secondary-button"
-                    type="button"
-                    onClick={() =>
-                      setLeadForm((current) => ({
-                        ...current,
-                        website: report.url,
-                        message: offer.request,
-                      }))
-                    }
-                  >
-                    Pick this
-                  </button>
+                  {getPaymentLink(offer.id) ? (
+                    <a className="button-link" href={getPaymentLink(offer.id)}>
+                      Pay and request
+                    </a>
+                  ) : (
+                    <button
+                      className="secondary-button"
+                      type="button"
+                      onClick={() =>
+                        setLeadForm((current) => ({
+                          ...current,
+                          website: report.url,
+                          message: offer.request,
+                        }))
+                      }
+                    >
+                      Pick this
+                    </button>
+                  )}
                 </article>
               ))}
             </div>
+            <p className="panel-copy">
+              Payment buttons appear here automatically after payment links are added in Vercel.
+            </p>
           </section>
 
           <div className="summary-grid">
