@@ -4,7 +4,7 @@ export async function GET() {
   return Response.json({
     status: "ok",
     service: "crawler-fleet",
-    version: "0.4.0",
+    version: "0.5.0",
     checked_at: new Date().toISOString(),
     checks: {
       app: "live",
@@ -12,6 +12,7 @@ export async function GET() {
       scanner: "ready",
       dashboard: "ready",
       deep_recon: "ready",
+      lead_inbox: process.env.GITHUB_LEAD_TOKEN ? "github-ready" : "fallback-ready",
     },
   });
 }

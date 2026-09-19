@@ -27,6 +27,7 @@ type LeadForm = {
   email: string;
   website: string;
   message: string;
+  company: string;
 };
 
 const teamLabels: Record<string, string> = {
@@ -72,11 +73,14 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
+  const [leadStatus, setLeadStatus] = useState("");
+  const [leadLoading, setLeadLoading] = useState(false);
   const [leadForm, setLeadForm] = useState<LeadForm>({
     name: "",
     email: "",
     website: "",
     message: "I would like help understanding and improving this website checkup.",
+    company: "",
   });
 
   async function runCheck(event: FormEvent<HTMLFormElement>) {
@@ -126,8 +130,7 @@ export default function Home() {
     URL.revokeObjectURL(link.href);
   }
 
-  function openLeadEmail(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function openLeadEmail() {
     const subject = `Website checkup help: ${leadForm.website || report?.url || "new request"}`;
     const body = [
       `Name: ${leadForm.name}`,
@@ -140,6 +143,39 @@ export default function Home() {
       report ? formatReport(report) : "No report was attached.",
     ].join("\n");
     window.location.href = `mailto:barnhartloren33@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  async function submitLeadRequest(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLeadLoading(true);
+    setLeadStatus("");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...leadForm,
+          report: report ? formatReport(report) : "",
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error ?? "The lead request failed.");
+      }
+      setLeadStatus(
+        payload.stored
+          ? "Request saved. I will review the report and follow up by email."
+          : "Request captured. Opening your email app as a backup until the lead inbox is connected.",
+      );
+      if (!payload.stored) {
+        openLeadEmail();
+      }
+    } catch (caught) {
+      setLeadStatus(caught instanceof Error ? caught.message : "The lead request failed.");
+    } finally {
+      setLeadLoading(false);
+    }
   }
 
   return (
@@ -247,11 +283,20 @@ export default function Home() {
               <p className="eyebrow">Need Help?</p>
               <h2>Turn this checkup into a fix plan.</h2>
               <p>
-                Send the report with your contact details and what you want help with. This opens your email app so you
-                can review it before sending.
+                Send the report with your contact details and what you want help with. Requests can save to a private
+                GitHub lead inbox once it is connected.
               </p>
             </div>
-            <form className="lead-form" onSubmit={openLeadEmail}>
+            <form className="lead-form" onSubmit={submitLeadRequest}>
+              <label className="hidden-field" aria-hidden="true">
+                Company
+                <input
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={leadForm.company}
+                  onChange={(event) => setLeadForm({ ...leadForm, company: event.target.value })}
+                />
+              </label>
               <div className="form-grid">
                 <label>
                   Name
@@ -292,7 +337,10 @@ export default function Home() {
                   required
                 />
               </label>
-              <button type="submit">Create email request</button>
+              <button type="submit" disabled={leadLoading}>
+                {leadLoading ? "Sending..." : "Request fix plan"}
+              </button>
+              {leadStatus ? <p className="lead-status">{leadStatus}</p> : null}
             </form>
           </section>
         </section>

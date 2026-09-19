@@ -6,8 +6,9 @@ const statusCards = [
   { label: "Healthcheck", value: "Online", detail: "/api/health reports app status", tone: "good" },
   { label: "Scan history", value: "Local", detail: "Recent checks are saved in this browser", tone: "good" },
   { label: "Deep recon", value: "Active", detail: "Headings, images, links, social, robots, sitemap", tone: "good" },
+  { label: "Lead inbox", value: "Ready", detail: "Saves to GitHub Issues when env vars are connected", tone: "good" },
   { label: "Fleet teams", value: "4", detail: "Technical, content, trust, conversion", tone: "good" },
-  { label: "Revenue path", value: "Started", detail: "Report sharing and lead request form", tone: "good" },
+  { label: "Revenue path", value: "Started", detail: "Report sharing, lead requests, pricing pages", tone: "good" },
 ];
 
 const quickActions = [
@@ -43,7 +44,8 @@ const monitorItems = [
   "Checker scope stays limited to one public HTML page plus same-origin robots and sitemap files.",
   "Deep recon checks should return evidence counts instead of guesses.",
   "Recent scans are saved in browser storage until database storage is added.",
-  "Lead requests open as email drafts until database storage is added.",
+  "Lead requests save to GitHub Issues when GITHUB_LEAD_TOKEN is configured.",
+  "Lead form falls back to email if the lead inbox is not connected yet.",
   "Payments are not connected yet.",
   "Ollama/AI recommendations are planned, not active.",
 ];
