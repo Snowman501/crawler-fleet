@@ -165,6 +165,21 @@ button:disabled {
   opacity: 0.7;
 }
 
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 14px 18px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 900;
+}
+
+.button-link:hover {
+  background: var(--accent-dark);
+}
+
 .secondary-button {
   border: 1px solid var(--line);
   background: #fff;
@@ -225,6 +240,50 @@ time {
 .report-actions span {
   color: var(--good);
   font-weight: 800;
+}
+
+.service-strip {
+  display: grid;
+  gap: 16px;
+  padding: 28px 0 4px;
+}
+
+.service-grid,
+.marketing-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.service-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.service-link,
+.marketing-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.service-link {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+}
+
+.service-link:hover {
+  border-color: var(--accent);
+}
+
+.service-link strong {
+  line-height: 1.25;
+}
+
+.service-link span,
+.marketing-card p,
+.panel-copy {
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .summary-grid {
@@ -328,6 +387,35 @@ time {
 .dashboard-shell {
   display: grid;
   gap: 24px;
+}
+
+.marketing-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.marketing-hero {
+  display: grid;
+  gap: 24px;
+  padding: 28px 0 12px;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.marketing-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.marketing-card {
+  padding: 20px;
+}
+
+.marketing-card h2 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
 }
 
 .dashboard-hero {
@@ -543,6 +631,8 @@ time {
   .dashboard-grid,
   .dashboard-columns,
   .roadmap-grid,
+  .service-grid,
+  .marketing-grid,
   .lead-panel,
   .form-grid {
     grid-template-columns: 1fr;
@@ -570,7 +660,8 @@ time {
   }
 
   button,
-  .report-actions button {
+  .report-actions button,
+  .button-link {
     width: 100%;
   }
 

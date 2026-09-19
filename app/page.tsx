@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { saveScanHistoryItem, summarizeReportForHistory } from "./lib/scan-history";
+import { marketingPages } from "./marketing-pages";
 
 type Finding = {
   team: string;
@@ -175,6 +176,21 @@ export default function Home() {
       </section>
 
       {error ? <p className="error">{error}</p> : null}
+
+      <section className="service-strip" aria-label="Free website tools">
+        <div className="section-head">
+          <p className="eyebrow">Free Services</p>
+          <h2>More doors into the scanner.</h2>
+        </div>
+        <div className="service-grid">
+          {marketingPages.slice(0, 5).map((page) => (
+            <a className="service-link" href={`/${page.slug}`} key={page.slug}>
+              <strong>{page.title}</strong>
+              <span>{page.description}</span>
+            </a>
+          ))}
+        </div>
+      </section>
 
       {report ? (
         <section className="report" aria-live="polite">
