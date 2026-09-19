@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMarketingPage, marketingPages } from "../marketing-pages";
+import { serviceOffers } from "../service-offers";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -63,16 +64,28 @@ export default async function MarketingPage({ params }: PageProps) {
 
       <section className="panel">
         <div className="section-head">
-          <p className="eyebrow">Free Checkup</p>
-          <h2>Start with one page.</h2>
+          <p className="eyebrow">{page.slug === "pricing" ? "Service Menu" : "Fix This For Me"}</p>
+          <h2>{page.slug === "pricing" ? "Simple fixed-price starting points." : "Turn the report into action."}</h2>
         </div>
         <p className="panel-copy">
-          Paste a public website URL, run the report, and use the evidence to decide whether the page needs a quick
-          cleanup, a fix plan, or a deeper review.
+          {page.slug === "pricing"
+            ? "Start with the free scan, then choose a specific help request when you want a plain-English review, cleanup plan, or page repair."
+            : "Paste a public website URL, run the report, and choose the service that best matches what needs fixing."}
         </p>
-        <a className="button-link" href="/">
-          Run Crawler Fleet
-        </a>
+        <div className="offer-grid">
+          {serviceOffers.map((offer) => (
+            <article className="offer-card" key={offer.name}>
+              <div>
+                <p className="offer-price">{offer.price}</p>
+                <h3>{offer.name}</h3>
+                <p>{offer.promise}</p>
+              </div>
+              <a className="button-link" href={`/?service=${encodeURIComponent(offer.name)}`}>
+                {page.slug === "pricing" ? "Start request" : "Request this"}
+              </a>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );

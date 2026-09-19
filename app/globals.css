@@ -249,7 +249,8 @@ time {
 }
 
 .service-grid,
-.marketing-grid {
+.marketing-grid,
+.offer-grid {
   display: grid;
   gap: 12px;
 }
@@ -259,7 +260,8 @@ time {
 }
 
 .service-link,
-.marketing-card {
+.marketing-card,
+.offer-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -281,9 +283,46 @@ time {
 
 .service-link span,
 .marketing-card p,
+.offer-card p,
 .panel-copy {
   color: var(--muted);
   line-height: 1.5;
+}
+
+.offer-panel {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+}
+
+.offer-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.offer-card {
+  display: grid;
+  gap: 16px;
+  align-content: space-between;
+  padding: 18px;
+}
+
+.offer-card h3 {
+  margin-bottom: 6px;
+}
+
+.offer-card .button-link,
+.offer-card button {
+  width: 100%;
+}
+
+.offer-price {
+  margin-bottom: 8px;
+  color: var(--ink) !important;
+  font-size: 1.7rem;
+  font-weight: 900;
 }
 
 .summary-grid {
@@ -647,6 +686,7 @@ time {
   .roadmap-grid,
   .service-grid,
   .marketing-grid,
+  .offer-grid,
   .lead-panel,
   .form-grid {
     grid-template-columns: 1fr;

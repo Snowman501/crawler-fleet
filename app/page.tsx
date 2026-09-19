@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { saveScanHistoryItem, summarizeReportForHistory } from "./lib/scan-history";
 import { marketingPages } from "./marketing-pages";
+import { serviceOffers } from "./service-offers";
 
 type Finding = {
   team: string;
@@ -68,6 +69,7 @@ function formatReport(report: Report) {
 }
 
 export default function Home() {
+  const defaultMessage = "I would like help understanding and improving this website checkup.";
   const [url, setUrl] = useState("https://example.com");
   const [report, setReport] = useState<Report | null>(null);
   const [error, setError] = useState("");
@@ -79,9 +81,31 @@ export default function Home() {
     name: "",
     email: "",
     website: "",
-    message: "I would like help understanding and improving this website checkup.",
+    message: defaultMessage,
     company: "",
   });
+  const visibleMarketingPages = useMemo(
+    () =>
+      marketingPages.filter((page) =>
+        [
+          "free-website-checker",
+          "small-business-website-audit",
+          "contractor-website-checker",
+          "author-website-checker",
+          "restaurant-website-checker",
+          "local-business-website-checker",
+        ].includes(page.slug),
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    const service = new URLSearchParams(window.location.search).get("service");
+    const offer = serviceOffers.find((item) => item.name === service);
+    if (offer) {
+      setLeadForm((current) => ({ ...current, message: offer.request }));
+    }
+  }, []);
 
   async function runCheck(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -189,8 +213,8 @@ export default function Home() {
         </div>
         <h1>Rough checks. Clean evidence. No guesswork.</h1>
         <p className="intro">
-          One page in. A battle plan out. Run a safe website recon scan across SEO basics, headings, links, images,
-          trust signals, conversion paths, robots, and sitemap health.
+          Find what is costing your website leads. Run a free website checkup across SEO basics, headings, links,
+          images, trust signals, conversion paths, robots, and sitemap health.
         </p>
         <form className="check-form" onSubmit={runCheck}>
           <label htmlFor="url">Website URL</label>
@@ -219,7 +243,7 @@ export default function Home() {
           <h2>More doors into the scanner.</h2>
         </div>
         <div className="service-grid">
-          {marketingPages.slice(0, 5).map((page) => (
+          {visibleMarketingPages.map((page) => (
             <a className="service-link" href={`/${page.slug}`} key={page.slug}>
               <strong>{page.title}</strong>
               <span>{page.description}</span>
@@ -250,6 +274,37 @@ export default function Home() {
             </button>
             {copyStatus ? <span>{copyStatus}</span> : null}
           </div>
+
+          <section className="offer-panel">
+            <div className="section-head">
+              <p className="eyebrow">Fix This For Me</p>
+              <h2>Choose a next step.</h2>
+            </div>
+            <div className="offer-grid">
+              {serviceOffers.slice(0, 4).map((offer) => (
+                <article className="offer-card" key={offer.name}>
+                  <div>
+                    <p className="offer-price">{offer.price}</p>
+                    <h3>{offer.name}</h3>
+                    <p>{offer.promise}</p>
+                  </div>
+                  <button
+                    className="secondary-button"
+                    type="button"
+                    onClick={() =>
+                      setLeadForm((current) => ({
+                        ...current,
+                        website: report.url,
+                        message: offer.request,
+                      }))
+                    }
+                  >
+                    Pick this
+                  </button>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className="summary-grid">
             {Object.entries(report.team_summary).map(([team, summary]) => (

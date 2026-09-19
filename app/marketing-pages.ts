@@ -28,8 +28,8 @@ export const marketingPages: MarketingPage[] = [
         body: "Every finding is tied to evidence like page titles, meta descriptions, headings, robots.txt, sitemap.xml, forms, contact links, and CTA language.",
       },
       {
-        title: "Useful before a sales call",
-        body: "The report can be copied, downloaded, or sent with a help request when a business wants a fix plan.",
+        title: "Useful before spending money",
+        body: "The report can be copied, downloaded, or sent with a help request before a business buys ads, redesigns a site, or pays for fixes.",
       },
     ],
   },
@@ -162,6 +162,182 @@ export const marketingPages: MarketingPage[] = [
       {
         title: "Website action plan",
         body: "$75 target offer. A deeper fix plan for SEO basics, trust signals, page copy, and lead capture.",
+      },
+    ],
+  },
+  {
+    slug: "contractor-website-checker",
+    eyebrow: "Contractors",
+    title: "Contractor website checker for calls, quotes, and trust",
+    description:
+      "Check whether a contractor website makes it easy for homeowners to trust the business, request a quote, or call fast.",
+    primaryCta: "Check my contractor site",
+    sections: [
+      {
+        title: "Quote paths",
+        body: "The scanner looks for forms, contact links, phone paths, and clear action language that help visitors request work.",
+      },
+      {
+        title: "Trust basics",
+        body: "About, contact, privacy, page titles, and visible structure all help a contractor website feel legitimate.",
+      },
+      {
+        title: "Before ads",
+        body: "Run the check before paying for Google or social ads so traffic has somewhere useful to land.",
+      },
+    ],
+  },
+  {
+    slug: "author-website-checker",
+    eyebrow: "Authors",
+    title: "Author website checker for books, bios, and reader paths",
+    description:
+      "Check whether an author page helps readers understand the book, find buying links, and trust the author brand.",
+    primaryCta: "Check my author site",
+    sections: [
+      {
+        title: "Reader path",
+        body: "A reader should quickly see what the book is, why it matters, and where to buy or learn more.",
+      },
+      {
+        title: "Search basics",
+        body: "Titles, descriptions, headings, and share previews help book pages make a better first impression.",
+      },
+      {
+        title: "Platform cleanup",
+        body: "Use the report before sending traffic from Books2Read, Amazon, social posts, or an author bio.",
+      },
+    ],
+  },
+  {
+    slug: "restaurant-website-checker",
+    eyebrow: "Restaurants",
+    title: "Restaurant website checker for menus, location, and fast action",
+    description:
+      "Check whether hungry customers can quickly find what they need: menu paths, contact options, hours, location clues, and calls to action.",
+    primaryCta: "Check my restaurant site",
+    sections: [
+      {
+        title: "Fast decisions",
+        body: "Restaurant visitors often need to act quickly. Missing contact paths or weak CTA language can cost orders.",
+      },
+      {
+        title: "Mobile first",
+        body: "Many food searches happen on phones, so viewport, headings, and simple action paths matter.",
+      },
+      {
+        title: "Trust and clarity",
+        body: "Clear links, policy paths, and page structure make the business easier to understand before a customer arrives.",
+      },
+    ],
+  },
+  {
+    slug: "local-business-website-checker",
+    eyebrow: "Local Business",
+    title: "Local business website checker for trust and leads",
+    description:
+      "Run a quick check for the basics local customers expect before they call, visit, request a quote, or book service.",
+    primaryCta: "Check my local business",
+    sections: [
+      {
+        title: "Local trust",
+        body: "Contact paths, about links, policy links, and simple page structure help visitors believe the business is real.",
+      },
+      {
+        title: "Lead capture",
+        body: "Forms, phone links, email links, and CTA language tell customers what to do next.",
+      },
+      {
+        title: "Launch readiness",
+        body: "Use the scanner before putting the site on social profiles, business cards, local listings, or paid ads.",
+      },
+    ],
+  },
+  {
+    slug: "ecommerce-trust-check",
+    eyebrow: "Ecommerce",
+    title: "Ecommerce trust check for policy links and buyer confidence",
+    description:
+      "Check whether a shop page has basic trust signals that can reduce hesitation before someone buys.",
+    primaryCta: "Check ecommerce trust",
+    sections: [
+      {
+        title: "Buyer confidence",
+        body: "Policy links, clear headings, contact paths, and social preview tags can make a shop feel safer.",
+      },
+      {
+        title: "Conversion friction",
+        body: "Missing calls to action or unclear lead paths can make even good products harder to buy.",
+      },
+      {
+        title: "Simple first pass",
+        body: "Crawler Fleet does not replace a full store audit, but it shows obvious page-level gaps fast.",
+      },
+    ],
+  },
+  {
+    slug: "mobile-website-checker",
+    eyebrow: "Mobile",
+    title: "Mobile website checker for phone-first visitors",
+    description:
+      "Check whether a page has basic mobile readiness signals and clear paths for people visiting from a phone.",
+    primaryCta: "Check mobile readiness",
+    sections: [
+      {
+        title: "Phone traffic",
+        body: "A mobile visitor needs a clear page title, readable structure, contact path, and action button fast.",
+      },
+      {
+        title: "Basic readiness",
+        body: "The scanner checks for viewport, headings, links, and conversion paths that affect phone visitors.",
+      },
+      {
+        title: "Simple next step",
+        body: "Use the report to decide whether the page needs a quick cleanup before sharing it again.",
+      },
+    ],
+  },
+  {
+    slug: "landing-page-audit",
+    eyebrow: "Landing Pages",
+    title: "Landing page audit for trust, SEO, and lead capture",
+    description:
+      "Check whether one landing page has the basic evidence, structure, and action path needed before you send traffic to it.",
+    primaryCta: "Audit my landing page",
+    sections: [
+      {
+        title: "One page focus",
+        body: "The scanner is intentionally scoped to one public page, which makes it useful for landing pages and campaign pages.",
+      },
+      {
+        title: "Traffic leaks",
+        body: "Missing forms, weak CTA language, or unclear trust paths can waste visitors from ads, posts, and links.",
+      },
+      {
+        title: "Action plan ready",
+        body: "The report gives enough evidence to request a fix plan without starting from a blank conversation.",
+      },
+    ],
+  },
+  {
+    slug: "new-business-website-launch-check",
+    eyebrow: "Launch",
+    title: "New business website launch check",
+    description:
+      "Run a practical readiness check before announcing a new business website, sharing it publicly, or putting it on profiles.",
+    primaryCta: "Check launch readiness",
+    sections: [
+      {
+        title: "Before you share",
+        body: "A quick scan can catch missing titles, descriptions, contact paths, policy links, forms, and sitemap basics.",
+      },
+      {
+        title: "Pre-revenue friendly",
+        body: "Start with free evidence and only request paid help when the report shows a fix worth doing.",
+      },
+      {
+        title: "Built for momentum",
+        body: "Use the report as a launch checklist and keep improving the page as the business grows.",
       },
     ],
   },
