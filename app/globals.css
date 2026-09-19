@@ -24,7 +24,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -134,6 +135,17 @@ input {
   color: var(--ink);
 }
 
+textarea {
+  min-width: 0;
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #fff;
+  color: var(--ink);
+}
+
 button {
   border: 0;
   border-radius: 8px;
@@ -151,6 +163,17 @@ button:hover {
 button:disabled {
   cursor: wait;
   opacity: 0.7;
+}
+
+.secondary-button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+}
+
+.secondary-button:hover {
+  border-color: var(--accent);
+  background: #f8fbff;
 }
 
 .error {
@@ -190,6 +213,18 @@ time {
 .scope {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.report-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.report-actions span {
+  color: var(--good);
+  font-weight: 800;
 }
 
 .summary-grid {
@@ -256,6 +291,38 @@ time {
 
 .evidence {
   font-size: 0.92rem;
+}
+
+.lead-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--panel);
+}
+
+.lead-panel p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.lead-form {
+  display: grid;
+  gap: 12px;
+}
+
+.lead-form label {
+  display: grid;
+  gap: 7px;
+  font-weight: 800;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .dashboard-shell {
@@ -418,7 +485,9 @@ time {
   .summary-grid,
   .dashboard-grid,
   .dashboard-columns,
-  .roadmap-grid {
+  .roadmap-grid,
+  .lead-panel,
+  .form-grid {
     grid-template-columns: 1fr;
   }
 
@@ -443,7 +512,8 @@ time {
     gap: 10px;
   }
 
-  button {
+  button,
+  .report-actions button {
     width: 100%;
   }
 
