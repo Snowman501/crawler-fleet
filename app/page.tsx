@@ -327,6 +327,20 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="trust-strip" aria-label="Early customer feedback">
+        <div>
+          <p className="eyebrow">Early Customer Feedback</p>
+          <h2>No fake ratings. No borrowed testimonials.</h2>
+          <p>
+            SL NextGen Web Intel is newly launched. Public reviews will be added only after real customer work is
+            delivered and the customer gives permission to share feedback.
+          </p>
+        </div>
+        <p className="panel-copy">
+          Just real notes from real website checkups as they come in.
+        </p>
+      </section>
+
       {report ? (
         <section className="report" aria-live="polite">
           <div className="report-head">
@@ -386,7 +400,7 @@ export default function Home() {
               ))}
             </div>
             <p className="panel-copy">
-              Payment buttons appear here automatically after payment links are added in Vercel.
+              Choose the option that matches the help you want. Payments are handled securely through Gumroad.
             </p>
           </section>
 
