@@ -17,6 +17,54 @@ TIMEOUT = 10
 MAX_BYTES = 1_000_000
 
 
+FLEET_CHECKS = [
+    {
+        "team": "technical",
+        "check": "HTTPS at final URL",
+        "evidence": "final URL scheme",
+        "detect": lambda context: urlparse(context["url"]).scheme == "https",
+        "why_it_matters": "A secure final URL is table stakes for customer trust and browser compatibility.",
+    },
+    {
+        "team": "technical",
+        "check": "Mobile viewport tag",
+        "evidence": 'meta[name="viewport"]',
+        "detect": lambda context: bool(context["viewport"]),
+        "why_it_matters": "A viewport tag helps the page render correctly on phones.",
+    },
+    {
+        "team": "content",
+        "check": "Page title",
+        "evidence": "<title>",
+        "detect": lambda context: bool(context["title"]),
+        "why_it_matters": "A title helps people and search engines understand the page.",
+    },
+    {
+        "team": "content",
+        "check": "Meta description",
+        "evidence": 'meta[name="description"]',
+        "detect": lambda context: bool(context["description"]),
+        "why_it_matters": "A clear description can improve how the page appears in search results.",
+    },
+    {
+        "team": "trust",
+        "check": "Contact link on inspected page",
+        "evidence": "anchor href values",
+        "detect": lambda context: any(
+            "contact" in link.lower() or link.startswith("mailto:") for link in context["links"]
+        ),
+        "why_it_matters": "A visible contact path makes the business easier to trust and reach.",
+    },
+    {
+        "team": "conversion",
+        "check": "Form on inspected page",
+        "evidence": "<form>",
+        "detect": lambda context: bool(context["forms"]),
+        "why_it_matters": "A form can turn visitor interest into a lead or customer request.",
+    },
+]
+
+
 def validate_url(url):
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or not parsed.hostname:
@@ -64,31 +112,76 @@ def inspect(url, html):
     viewport = soup.find("meta", attrs={"name": lambda v: v and v.lower() == "viewport"})
     links = [a.get("href", "") for a in soup.find_all("a", href=True)]
     forms = soup.find_all("form")
-    checks = [
-        ("Page title", bool(title), "<title>"),
-        ("Meta description", bool(description), 'meta[name="description"]'),
-        ("Mobile viewport tag", bool(viewport), 'meta[name="viewport"]'),
-        ("HTTPS at final URL", urlparse(url).scheme == "https", url),
-        ("Contact link on inspected page", any("contact" in link.lower() or link.startswith("mailto:") for link in links), "anchor href values"),
-        ("Form on inspected page", bool(forms), "<form>"),
-    ]
+    context = {
+        "url": url,
+        "title": title,
+        "description": description,
+        "viewport": viewport,
+        "links": links,
+        "forms": forms,
+    }
+    findings = []
+    for check in FLEET_CHECKS:
+        findings.append(
+            {
+                "team": check["team"],
+                "check": check["check"],
+                "detected": bool(check["detect"](context)),
+                "evidence": url if check["check"] == "HTTPS at final URL" else check["evidence"],
+                "why_it_matters": check["why_it_matters"],
+            }
+        )
+    team_summary = summarize_by_team(findings)
     return {
         "url": url,
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "scope": "HTML of one public page; absence here does not mean a feature is absent sitewide",
         "title": title[:160],
         "description": description[:300],
-        "findings": [
-            {"check": name, "detected": detected, "evidence": evidence}
-            for name, detected, evidence in checks
-        ],
+        "team_summary": team_summary,
+        "findings": findings,
     }
+
+
+def summarize_by_team(findings):
+    summary = {}
+    for finding in findings:
+        team = finding["team"]
+        if team not in summary:
+            summary[team] = {"passed": 0, "total": 0, "missing": []}
+        summary[team]["total"] += 1
+        if finding["detected"]:
+            summary[team]["passed"] += 1
+        else:
+            summary[team]["missing"].append(finding["check"])
+    return summary
+
+
+def format_text_report(report):
+    lines = [
+        "Crawler Fleet Website Checkup",
+        f"URL: {report['url']}",
+        f"Scope: {report['scope']}",
+        "",
+        "Team summary:",
+    ]
+    for team, summary in sorted(report["team_summary"].items()):
+        missing = ", ".join(summary["missing"]) if summary["missing"] else "none"
+        lines.append(f"- {team}: {summary['passed']}/{summary['total']} detected; missing: {missing}")
+    lines.extend(["", "Findings:"])
+    for finding in report["findings"]:
+        status = "detected" if finding["detected"] else "not detected"
+        lines.append(f"- [{finding['team']}] {finding['check']}: {status}")
+        lines.append(f"  Evidence checked: {finding['evidence']}")
+        lines.append(f"  Why it matters: {finding['why_it_matters']}")
+    return "\n".join(lines) + "\n"
 
 
 def main():
     parser = argparse.ArgumentParser(description="Check one public website and save an evidence-based JSON report")
     parser.add_argument("url", help="Full http:// or https:// URL")
     parser.add_argument("--output", default="report.json", help="Output JSON path")
+    parser.add_argument("--text-output", help="Optional plain-English report path")
     args = parser.parse_args()
     try:
         final_url, html = fetch(args.url)
@@ -98,6 +191,9 @@ def main():
     with open(args.output, "w", encoding="utf-8") as output:
         json.dump(report, output, indent=2)
         output.write("\n")
+    if args.text_output:
+        with open(args.text_output, "w", encoding="utf-8") as output:
+            output.write(format_text_report(report))
     print(f"Saved {args.output}: {len(report['findings'])} checks of {final_url}")
 
 
