@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">SL NextGen Audit</title>
+  <desc id="desc">A blue app icon with a white checkmark and signal lines.</desc>
+  <rect width="512" height="512" rx="112" fill="#171714"/>
+  <path fill="#2362d1" d="M96 256c0-88.4 71.6-160 160-160s160 71.6 160 160-71.6 160-160 160S96 344.4 96 256Z"/>
+  <path fill="#fff" d="m224.7 317.6-66.3-66.3 28.2-28.3 38.1 38 101.7-101.6 28.2 28.2-129.9 130Z"/>
+  <path fill="#fff" fill-opacity=".78" d="M136 128h88v28h-88v-28Zm0 228h88v28h-88v-28Zm252-114h52v28h-52v-28Z"/>
+</svg>

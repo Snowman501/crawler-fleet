@@ -73,9 +73,11 @@ export async function GET() {
     },
     installs: {
       web: "ready",
-      phone: "install from browser with Add to Home Screen",
+      pwa_manifest: "ready",
+      phone: "installable from browser with Add to Home Screen",
       linux: "planned CLI wrapper",
       windows: "planned desktop wrapper",
+      galaxy_store: "planned Android wrapper after web launch",
     },
     next_actions: [
       "Add payment links",

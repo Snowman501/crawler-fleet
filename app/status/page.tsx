@@ -11,15 +11,15 @@ const installPaths = [
   {
     title: "Web App",
     status: "Live now",
-    detail: "Use SL NextGen Audit directly in the browser from any device.",
+    detail: "Use SL NextGen Audit directly in the browser from any device. No download required.",
     action: "Open scanner",
     href: "/",
   },
   {
     title: "Cell Phone",
-    status: "Ready as web app",
-    detail: "Open the site on Android or iPhone and use Add to Home Screen for app-like access.",
-    action: "Open mobile app",
+    status: "Installable web app",
+    detail: "Open this site in Samsung Internet, Chrome, or Safari, then choose Add to Home screen for app-like access.",
+    action: "Install guide",
     href: "/",
   },
   {
@@ -43,6 +43,7 @@ const nextActions = [
   "Add admin-only access before storing private customer history.",
   "Add AI-generated action plans from detected evidence.",
   "Add branded PDF report downloads.",
+  "Package Android, Windows, and Linux apps after the web app starts getting real usage.",
 ];
 
 export default function StatusPage() {
@@ -59,7 +60,7 @@ export default function StatusPage() {
           <h1>Live system status for the website audit engine.</h1>
           <p className="intro">
             Crawler Fleet powers the scan engine under SL NextGen Audit. This page shows what is online, what is ready,
-            and what still needs to be connected before full paid-service launch.
+            and how businesses can use the scanner from web, phone, Windows, and Linux.
           </p>
         </div>
       </section>
@@ -94,6 +95,10 @@ export default function StatusPage() {
         <div className="section-head">
           <p className="eyebrow">Use Anywhere</p>
           <h2>Download and install path</h2>
+          <p className="section-copy">
+            The web app is the main product today. Phone installation works through the browser. Store downloads come
+            after payments, admin access, and customer flow are stable.
+          </p>
         </div>
         <div className="install-grid">
           {installPaths.map((item) => (
@@ -109,6 +114,20 @@ export default function StatusPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="install-help">
+        <div>
+          <p className="eyebrow">Install App</p>
+          <h2>Add SL NextGen Audit to a phone.</h2>
+          <p>
+            On Samsung Internet or Chrome, open the site menu and choose <strong>Add page to</strong> or{" "}
+            <strong>Add to Home screen</strong>. On iPhone Safari, use Share, then <strong>Add to Home Screen</strong>.
+          </p>
+        </div>
+        <a className="button-link" href="/">
+          Open installable app
+        </a>
       </section>
 
       <section className="panel">

@@ -1,0 +1,36 @@
+{
+  "name": "SL NextGen Audit",
+  "short_name": "NextGen Audit",
+  "description": "Evidence-first website checkups for trust, search, leads, and launch readiness. Powered by Crawler Fleet.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f7f4",
+  "theme_color": "#2362d1",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Run Website Check",
+      "short_name": "Scan",
+      "description": "Open the scanner and check a public website page.",
+      "url": "/",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "System Status",
+      "short_name": "Status",
+      "description": "View SL NextGen Audit system status.",
+      "url": "/status",
+      "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ]
+}
