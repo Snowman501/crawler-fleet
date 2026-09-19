@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { saveScanHistoryItem, summarizeReportForHistory } from "./lib/scan-history";
 
 type Finding = {
   team: string;
@@ -94,6 +95,7 @@ export default function Home() {
         throw new Error(payload.error ?? "The check failed.");
       }
       setReport(payload);
+      saveScanHistoryItem(summarizeReportForHistory(payload));
       setLeadForm((current) => ({ ...current, website: payload.url }));
       setCopyStatus("");
     } catch (caught) {

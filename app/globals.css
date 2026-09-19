@@ -415,6 +415,13 @@ time {
   margin-bottom: 16px;
 }
 
+.split-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .section-head h2 {
   margin-bottom: 0;
 }
@@ -452,6 +459,56 @@ time {
   gap: 10px;
   margin: 0;
   padding-left: 20px;
+}
+
+.compact-button {
+  padding: 9px 12px;
+  font-size: 0.9rem;
+}
+
+.history-list {
+  display: grid;
+  gap: 12px;
+}
+
+.history-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+
+.history-card h3,
+.history-card p {
+  margin-bottom: 4px;
+}
+
+.history-card p,
+.history-meta span,
+.empty-state {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.history-card > p {
+  grid-column: 1 / -1;
+}
+
+.history-meta {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.history-meta strong {
+  font-size: 1.5rem;
+}
+
+.empty-state {
+  margin-bottom: 0;
 }
 
 .roadmap-grid {
@@ -522,6 +579,19 @@ time {
   }
 
   .action-card span {
+    width: fit-content;
+  }
+
+  .split-head,
+  .history-card {
+    display: grid;
+  }
+
+  .history-meta {
+    justify-items: start;
+  }
+
+  .compact-button {
     width: fit-content;
   }
 }

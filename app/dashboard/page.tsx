@@ -1,7 +1,10 @@
+import ScanHistoryPanel from "../components/ScanHistoryPanel";
+
 const statusCards = [
   { label: "Public app", value: "Live", detail: "questforgeai.vercel.app", tone: "good" },
   { label: "Check API", value: "Ready", detail: "/api/check accepts one URL per run", tone: "good" },
   { label: "Healthcheck", value: "Online", detail: "/api/health reports app status", tone: "good" },
+  { label: "Scan history", value: "Local", detail: "Recent checks are saved in this browser", tone: "good" },
   { label: "Fleet teams", value: "4", detail: "Technical, content, trust, conversion", tone: "good" },
   { label: "Revenue path", value: "Started", detail: "Report sharing and lead request form", tone: "good" },
 ];
@@ -37,13 +40,14 @@ const monitorItems = [
   "Latest production deployment should build from main.",
   "Healthcheck should return status ok.",
   "Checker scope stays limited to one public HTML page.",
+  "Recent scans are saved in browser storage until database storage is added.",
   "Lead requests open as email drafts until database storage is added.",
   "Payments are not connected yet.",
   "Ollama/AI recommendations are planned, not active.",
 ];
 
 const roadmap = [
-  "Save scan history in a database.",
+  "Move browser scan history into a shared database.",
   "Add admin-only dashboard access.",
   "Add deeper crawler checks for headings, links, images, robots, and sitemap.",
   "Use Ollama locally or a hosted model to draft plain-English recommendations from evidence.",
@@ -113,6 +117,8 @@ export default function Dashboard() {
           </ul>
         </div>
       </section>
+
+      <ScanHistoryPanel />
 
       <section className="panel">
         <div className="section-head">
