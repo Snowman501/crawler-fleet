@@ -920,3 +920,23 @@ time {
     width: fit-content;
   }
 }
+
+@media print {
+  @page { size: auto; margin: 15mm; }
+
+  body { background: white; color: #171714; font-size: 10pt; }
+  .shell { width: 100%; padding: 0; }
+  .shell > :not(.report) { display: none !important; }
+  .report { display: block; padding: 0; border: 0; box-shadow: none; background: white; }
+  .report-actions, .print-help, .offer-panel, .next-step-panel, .lead-panel { display: none !important; }
+  .report-head { display: block; margin-bottom: 12pt; }
+  .report-head h2 { font-size: 19pt; overflow-wrap: anywhere; }
+  .report-head p { overflow-wrap: anywhere; }
+  .scope { border-left: 3px solid #666; padding-left: 10pt; }
+  .summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9pt; }
+  .summary-card, .finding { background: white; box-shadow: none; border: 1px solid #ccc; break-inside: avoid; page-break-inside: avoid; }
+  .findings { display: block; }
+  .finding { margin: 0 0 9pt; }
+  a { text-decoration: none; }
+  .status { color: #222 !important; border-color: #777 !important; }
+}
