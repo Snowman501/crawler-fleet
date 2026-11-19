@@ -359,10 +359,14 @@ export default function Home() {
               Copy report
             </button>
             <button className="secondary-button" type="button" onClick={downloadReport}>
-              Download report
+              Download text
+            </button>
+            <button className="secondary-button" type="button" onClick={() => window.print()}>
+              Save or print PDF
             </button>
             {copyStatus ? <span>{copyStatus}</span> : null}
           </div>
+          <p className="print-help">On Android, choose “Save as PDF” in your browser’s print options. No account or upload needed.</p>
 
           <section className="offer-panel">
             <div className="section-head">
