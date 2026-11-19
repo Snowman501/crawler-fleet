@@ -1,4 +1,5 @@
 export const runtime = "nodejs";
+import { PAID_SERVICES_PAUSED } from "../../service-offers";
 
 const paymentEnvKeys = [
   "NEXT_PUBLIC_PAYMENT_QUICK_FIX_REVIEW",
@@ -50,7 +51,7 @@ export async function GET() {
       deep_recon: "limited HTML rule checks; not a browser or sitewide audit",
       trust_center: "ready",
       lead_inbox: leadInboxConfigured ? "configured; private repository verification occurs at submission" : "email-fallback-only",
-      payment_links: paymentsConfigured ? "configured; checkout unverified" : "not-configured",
+      payment_links: PAID_SERVICES_PAUSED ? "paused; purchase buttons disabled" : paymentsConfigured ? "configured; checkout unverified" : "not-configured",
       ai_action_plans: "planned",
     },
     routes: {
@@ -81,7 +82,7 @@ export async function GET() {
       galaxy_store: "planned Android wrapper after web launch",
     },
     next_actions: [
-      "Add payment links",
+      "Review permitted payment services and test checkout before re-enabling paid orders",
       "Add admin-only dashboard access",
       "Add AI-generated action plans",
       "Move scan history into a shared database",
