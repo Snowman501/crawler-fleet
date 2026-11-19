@@ -73,7 +73,7 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "Paid work",
-        body: "Paid services begin after payment or approval is confirmed. Fixed-price offers are scoped to the described review, plan, or cleanup and may require a separate quote for larger work.",
+        body: "Paid services are temporarily paused while payment and fulfillment arrangements are reviewed. No paid orders are being accepted through this site.",
       },
     ],
   },
@@ -95,7 +95,7 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "3. Request help",
-        body: "Choose a fixed next step like Quick Fix Review or Website Action Plan. Payment links can be connected when the payment account is ready.",
+        body: "You can use the free scanner and download its report today. Paid reviews and repair services are temporarily unavailable.",
       },
     ],
   },
@@ -311,11 +311,11 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "Quick fix review",
-        body: "$25 target offer. A plain-English review of the report with the highest-impact fixes listed first.",
+        body: "Temporarily unavailable. The planned review would list the highest-impact fixes in plain English.",
       },
       {
         title: "Website action plan",
-        body: "$75 target offer. A deeper fix plan for SEO basics, trust signals, page copy, and lead capture.",
+        body: "Temporarily unavailable. The planned service would provide a deeper website improvement plan.",
       },
     ],
   },
