@@ -10,7 +10,7 @@ const paymentEnvKeys = [
 
 export async function GET() {
   const paymentsConfigured = paymentEnvKeys.some((key) => Boolean(process.env[key]));
-  const leadInboxConfigured = Boolean(process.env.GITHUB_LEAD_TOKEN);
+  const leadInboxConfigured = Boolean(process.env.GITHUB_LEAD_TOKEN && process.env.GITHUB_LEAD_REPO);
   const readySystems = [
     true,
     true,
@@ -39,20 +39,18 @@ export async function GET() {
     },
     readiness: {
       score: `${readySystems}/8`,
-      launch_ready: !paymentsConfigured,
-      note: paymentsConfigured
-        ? "Core systems and payment links are configured."
-        : "Core systems are live; payment links are the main missing revenue connection.",
+      launch_ready: false,
+      note: "The public scanner is deployed. Lead inbox privacy and paid checkout require separate end-to-end verification before commercial launch.",
     },
     checks: {
       app: "live",
       api: "ready",
       scanner: "ready",
       dashboard: "ready",
-      deep_recon: "ready",
+      deep_recon: "limited HTML rule checks; not a browser or sitewide audit",
       trust_center: "ready",
-      lead_inbox: leadInboxConfigured ? "github-ready" : "fallback-ready",
-      payment_links: paymentsConfigured ? "configured" : "not-configured",
+      lead_inbox: leadInboxConfigured ? "configured; private repository verification occurs at submission" : "email-fallback-only",
+      payment_links: paymentsConfigured ? "configured; checkout unverified" : "not-configured",
       ai_action_plans: "planned",
     },
     routes: {

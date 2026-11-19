@@ -191,7 +191,7 @@ export default function Home() {
       "",
       report ? formatReport(report) : "No report was attached.",
     ].join("\n");
-    window.location.href = `mailto:barnhartloren33@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:lb.designstudio.2024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   async function submitLeadRequest(event: FormEvent<HTMLFormElement>) {
@@ -215,7 +215,7 @@ export default function Home() {
       setLeadStatus(
         payload.stored
           ? "Request saved. I will review the report and follow up by email."
-          : "Request captured. Opening your email app as a backup until the lead inbox is connected.",
+          : "Request was not saved online. Please send the prepared email in your email app to complete your inquiry.",
       );
       if (!payload.stored) {
         openLeadEmail();

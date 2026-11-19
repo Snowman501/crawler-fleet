@@ -1,8 +1,8 @@
 const systems = [
   { label: "Scanner", value: "Online", detail: "Public website checks are live.", tone: "good" },
-  { label: "Lead Inbox", value: "Ready", detail: "Requests save to GitHub Issues when configured, with email fallback.", tone: "good" },
-  { label: "Payments", value: "Not Connected", detail: "Checkout buttons activate after payment links are added.", tone: "warn" },
-  { label: "Deep Recon", value: "Active", detail: "Checks headings, images, links, social tags, robots, and sitemap.", tone: "good" },
+  { label: "Lead Inbox", value: "Verify", detail: "Private GitHub storage must be explicitly configured; otherwise visitors must send the prepared email.", tone: "warn" },
+  { label: "Payments", value: "Verify", detail: "Payment URLs require an independent checkout test before relying on them.", tone: "warn" },
+  { label: "HTML Checks", value: "Limited", detail: "Inspects one public page's HTML plus robots and sitemap; it does not test full browser behavior.", tone: "warn" },
   { label: "Last Deployment", value: "Live", detail: "Production deploy is aliased to questforgeai.vercel.app.", tone: "good" },
   { label: "Health API", value: "OK", detail: "/api/health returns machine-readable system status.", tone: "good" },
   { label: "Trust Center", value: "Live", detail: "Security posture, scan limits, and verification links are public.", tone: "good" },
@@ -69,9 +69,9 @@ export default function StatusPage() {
       <section className="status-banner">
         <div>
           <p className="eyebrow">Current Readiness</p>
-          <h2>Core system online. Payments are the main missing connection.</h2>
+          <h2>Public scanner online. Customer and payment workflows need verification.</h2>
           <p>
-            The public scanner, dashboard, deep recon checks, lead request path, trust pages, and health API are active.
+            The scanner, dashboard, trust pages, and health API are deployed. Private lead storage and paid checkout are not certified by this status page.
           </p>
         </div>
         <div className="promo-actions">
