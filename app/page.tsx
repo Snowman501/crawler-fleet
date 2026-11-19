@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { saveScanHistoryItem, summarizeReportForHistory } from "./lib/scan-history";
 import { marketingPages } from "./marketing-pages";
-import { getPaymentLink, serviceOffers } from "./service-offers";
+import { PAID_SERVICES_PAUSED, serviceOffers } from "./service-offers";
 
 type Finding = {
   team: string;
@@ -366,41 +366,13 @@ export default function Home() {
 
           <section className="offer-panel">
             <div className="section-head">
-              <p className="eyebrow">Fix This For Me</p>
-              <h2>Choose a next step.</h2>
-            </div>
-            <div className="offer-grid">
-              {serviceOffers.slice(0, 4).map((offer) => (
-                <article className="offer-card" key={offer.id}>
-                  <div>
-                    <p className="offer-price">{offer.price}</p>
-                    <h3>{offer.name}</h3>
-                    <p>{offer.promise}</p>
-                  </div>
-                  {getPaymentLink(offer.id) ? (
-                    <a className="button-link" href={getPaymentLink(offer.id)}>
-                      Pay and request
-                    </a>
-                  ) : (
-                    <button
-                      className="secondary-button"
-                      type="button"
-                      onClick={() =>
-                        setLeadForm((current) => ({
-                          ...current,
-                          website: report.url,
-                          message: offer.request,
-                        }))
-                      }
-                    >
-                      Pick this
-                    </button>
-                  )}
-                </article>
-              ))}
+              <p className="eyebrow">Service Availability</p>
+              <h2>Paid services are temporarily paused.</h2>
             </div>
             <p className="panel-copy">
-              Choose the option that matches the help you want. Payments are handled securely through Gumroad.
+              {PAID_SERVICES_PAUSED
+                ? "The free scanner, copy, and report download remain available. We are not accepting paid orders while we review payment and delivery arrangements. Please do not purchase from older checkout links."
+                : "The free scanner remains available."}
             </p>
           </section>
 

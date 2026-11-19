@@ -6,6 +6,10 @@ export type ServiceOffer = {
   request: string;
 };
 
+// Safety pause: do not expose legacy Gumroad checkouts until the payment
+// provider and service fulfillment model have been reviewed and approved.
+export const PAID_SERVICES_PAUSED = true;
+
 export const serviceOffers: ServiceOffer[] = [
   {
     id: "quick-fix-review",
@@ -45,6 +49,7 @@ export const serviceOffers: ServiceOffer[] = [
 ];
 
 export function getPaymentLink(offerId: string) {
+  if (PAID_SERVICES_PAUSED) return "";
   switch (offerId) {
     case "quick-fix-review":
       return process.env.NEXT_PUBLIC_PAYMENT_QUICK_FIX_REVIEW ?? "";

@@ -1,7 +1,7 @@
 const systems = [
   { label: "Scanner", value: "Online", detail: "Public website checks are live.", tone: "good" },
   { label: "Lead Inbox", value: "Verify", detail: "Private GitHub storage must be explicitly configured; otherwise visitors must send the prepared email.", tone: "warn" },
-  { label: "Payments", value: "Verify", detail: "Payment URLs require an independent checkout test before relying on them.", tone: "warn" },
+  { label: "Payments", value: "Paused", detail: "Paid purchase buttons are disabled while payment and fulfillment are reviewed.", tone: "warn" },
   { label: "HTML Checks", value: "Limited", detail: "Inspects one public page's HTML plus robots and sitemap; it does not test full browser behavior.", tone: "warn" },
   { label: "Last Deployment", value: "Live", detail: "Production deploy is aliased to questforgeai.vercel.app.", tone: "good" },
   { label: "Health API", value: "OK", detail: "/api/health returns machine-readable system status.", tone: "good" },
@@ -40,7 +40,7 @@ const installPaths = [
 ];
 
 const nextActions = [
-  "Connect payment links for paid reviews and fix plans.",
+  "Review payment provider eligibility before re-enabling paid services.",
   "Add admin-only access before storing private customer history.",
   "Add AI-generated action plans from detected evidence.",
   "Add branded PDF report downloads.",
