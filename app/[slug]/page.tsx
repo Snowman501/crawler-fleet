@@ -20,6 +20,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${page.title} | SL NextGen Web Intel`,
     description: page.description,
+    alternates: { canonical: `/${slug}` },
+    openGraph: {
+      type: "website",
+      url: `https://questforgeai.vercel.app/${slug}`,
+      title: `${page.title} | SL NextGen Web Intel`,
+      description: page.description,
+    },
   };
 }
 
@@ -48,7 +55,7 @@ export default async function MarketingPage({ params }: PageProps) {
             {page.primaryCta}
           </a>
           <a className="nav-link" href="/pricing">
-            View pricing
+            Service availability
           </a>
         </div>
       </section>
