@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   title: "SL NextGen Web Intel | Website Checkups",
   description:
     "Evidence-first website checkups for small business SEO, trust signals, lead capture, and launch readiness. Powered by Crawler Fleet.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://questforgeai.vercel.app/",
+    siteName: "SL NextGen Web Intel",
+    title: "SL NextGen Web Intel | Website Checkups",
+    description: "Free, evidence-based website checkups with clear findings and downloadable reports.",
+  },
   applicationName: "SL NextGen Web Intel",
   manifest: "/manifest.webmanifest",
   icons: {

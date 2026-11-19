@@ -16,12 +16,12 @@ export const marketingPages: MarketingPage[] = [
     eyebrow: "Contact",
     title: "Contact SL NextGen Web Intel",
     description:
-      "Request website checkup help by running a scan and sending the report through the fix-plan form.",
+      "Questions about a free website checkup? Email lb.designstudio.2024@gmail.com or send a report inquiry.",
     primaryCta: "Run a checkup",
     sections: [
       {
         title: "Best way to start",
-        body: "Run the free scanner first. The report gives both sides a clear starting point before any paid work begins.",
+        body: "Run the free scanner first. For questions, email lb.designstudio.2024@gmail.com. Paid services are currently paused.",
       },
       {
         title: "No phone-first pressure",
@@ -123,11 +123,11 @@ export const marketingPages: MarketingPage[] = [
   },
   {
     slug: "launch-promo",
-    eyebrow: "Launch Promo",
-    title: "Launch promo website checkups for early users",
+    eyebrow: "Free Scanner",
+    title: "Free website checkups for early users",
     description:
-      "Try the free scanner, then request a discounted first-pass review while SL NextGen Web Intel is launching.",
-    primaryCta: "Claim launch promo",
+      "Use the free scanner and save your report. Paid reviews are temporarily paused.",
+    primaryCta: "Run a free check",
     sections: [
       {
         title: "Free scan first",
@@ -135,11 +135,11 @@ export const marketingPages: MarketingPage[] = [
       },
       {
         title: "Launch review",
-        body: "Early users can request a quick fix review based on the report so they know the highest-impact next steps.",
+        body: "Each free report includes evidence, plain-English explanations, and suggested next steps. Paid reviews are not currently available.",
       },
       {
         title: "No pressure path",
-        body: "If the scan does not show anything worth fixing, keep the report and move on. Paid help starts only when a business chooses it.",
+        body: "Keep the report, print it, and use it whenever you need. No signup or payment is required.",
       },
     ],
   },
@@ -498,22 +498,22 @@ export const marketingPages: MarketingPage[] = [
   {
     slug: "about",
     eyebrow: "About",
-    title: "Evidence-first website intelligence by SL NextGen Web Intel",
+    title: "The people and purpose behind SL NextGen Web Intel",
     description:
-      "SL NextGen Web Intel is a website intelligence system powered by Crawler Fleet built to help small businesses find practical website problems fast.",
+      "Built by Loren Barnhart with Stacy at the heart of the mission: practical technology with compassion, clarity, and respect.",
     primaryCta: "Use the scanner",
     sections: [
       {
-        title: "The mission",
-        body: "Give small businesses a fast, understandable first look at the issues that can keep a website from earning trust or leads.",
+        title: "Loren and Stacy",
+        body: "Loren Barnhart builds tools to help people solve real problems. Stacy's support and their life together inspire the human side of that work. The guiding idea is simple: Where Innovation Meets Compassion.",
       },
       {
         title: "The method",
         body: "The scanner stays scoped, records what it checked, and avoids pretending absence on one page means absence across the whole site.",
       },
       {
-        title: "The path",
-        body: "Free check first, clear evidence next, paid help only when the business wants a fix plan.",
+        title: "The promise",
+        body: "Free check first, clear evidence next. No mandatory account, no surprise checkout, and no paid orders while services are paused. Your report remains yours to save or share.",
       },
     ],
   },
