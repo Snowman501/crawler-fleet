@@ -264,16 +264,16 @@ export default function Home() {
 
       <section className="promo-panel">
         <div>
-          <p className="eyebrow">Launch Promo</p>
+          <p className="eyebrow">Free report guide</p>
           <h2>Not sure what your report means?</h2>
           <p>
-            Run the free check first. If the report shows missing trust, search, or lead-capture basics, request a
-            launch review and get the highest-impact fixes listed in plain English.
+            Run the free check and read the findings in plain English. Paid reviews are temporarily paused,
+            but you can still save, print, and share the free report.
           </p>
         </div>
         <div className="promo-actions">
-          <a className="button-link" href="/launch-promo">
-            View launch promo
+          <a className="button-link" href="/example-report">
+            View example report
           </a>
           <a className="nav-link" href="/what-to-do-next">
             What to do next
@@ -298,11 +298,11 @@ export default function Home() {
 
       <section className="trust-strip" aria-label="SL NextGen Web Intel trust information">
         <div>
-          <p className="eyebrow">Before You Buy</p>
-          <h2>Clear path. Written request. No pressure.</h2>
+          <p className="eyebrow">Our promise</p>
+          <h2>Clear findings. No account. No pressure.</h2>
           <p>
             SL NextGen Web Intel is built so a business can scan a page, understand the evidence, and request help in
-            writing before paying for a bigger fix.
+            writing if they need an explanation. Paid services are paused.
           </p>
         </div>
         <div className="trust-links">
@@ -314,6 +314,12 @@ export default function Home() {
           </a>
           <a className="nav-link" href="/contact">
             Contact
+          </a>
+          <a className="nav-link" href="/about">
+            About us
+          </a>
+          <a className="nav-link" href="mailto:lb.designstudio.2024@gmail.com">
+            Email us
           </a>
           <a className="nav-link" href="/privacy">
             Privacy
@@ -442,8 +448,8 @@ export default function Home() {
               <p className="eyebrow">Need Help?</p>
               <h2>Turn this checkup into a fix plan.</h2>
               <p>
-                Send the report with your contact details and what you want help with. Requests can save to a private
-                GitHub lead inbox once it is connected.
+                Have a question about your report? Send the website URL, your question, and optional report.
+                No account required. Paid services are currently unavailable.
               </p>
             </div>
             <form className="lead-form" onSubmit={submitLeadRequest}>
