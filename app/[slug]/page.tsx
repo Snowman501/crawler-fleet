@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMarketingPage, marketingPages } from "../marketing-pages";
-import { getPaymentLink, serviceOffers } from "../service-offers";
+import { PAID_SERVICES_PAUSED } from "../service-offers";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -65,30 +65,14 @@ export default async function MarketingPage({ params }: PageProps) {
       <section className="panel">
         <div className="section-head">
           <p className="eyebrow">{page.slug === "pricing" ? "Service Menu" : "Fix This For Me"}</p>
-          <h2>{page.slug === "pricing" ? "Simple fixed-price starting points." : "Turn the report into action."}</h2>
+          <h2>Paid services are temporarily paused.</h2>
         </div>
         <p className="panel-copy">
-          {page.slug === "pricing"
-            ? "Start with the free scan, then choose a specific help request when you want a plain-English review, cleanup plan, or page repair."
-            : "Paste a public website URL, run the report, and choose the service that best matches what needs fixing."}
+          {PAID_SERVICES_PAUSED
+            ? "No paid orders are being accepted through this website while checkout and fulfillment are reviewed. The public website scanner remains free. Please do not purchase through any older Gumroad link."
+            : "The free scanner is available."}
         </p>
-        <div className="offer-grid">
-          {serviceOffers.map((offer) => (
-            <article className="offer-card" key={offer.id}>
-              <div>
-                <p className="offer-price">{offer.price}</p>
-                <h3>{offer.name}</h3>
-                <p>{offer.promise}</p>
-              </div>
-              <a className="button-link" href={getPaymentLink(offer.id) || `/?service=${encodeURIComponent(offer.name)}`}>
-                {getPaymentLink(offer.id) ? "Pay and request" : page.slug === "pricing" ? "Start request" : "Request this"}
-              </a>
-            </article>
-          ))}
-        </div>
-        <p className="panel-copy">
-          Payment buttons activate automatically when payment links are added to the production environment.
-        </p>
+        <a className="button-link" href="/">Run a free website scan</a>
       </section>
     </main>
   );
