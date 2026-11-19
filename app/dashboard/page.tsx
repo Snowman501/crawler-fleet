@@ -7,7 +7,7 @@ const statusCards = [
   { label: "Scan history", value: "Local", detail: "Recent checks are saved in this browser", tone: "good" },
   { label: "Deep recon", value: "Active", detail: "Headings, images, links, social, robots, sitemap", tone: "good" },
   { label: "Lead inbox", value: "Ready", detail: "Saves to GitHub Issues when env vars are connected", tone: "good" },
-  { label: "Payment links", value: "Ready", detail: "Checkout buttons activate when links are added", tone: "good" },
+  { label: "Payment links", value: "Paused", detail: "Paid service checkout is disabled during the payment-provider review", tone: "warn" },
   { label: "Fleet teams", value: "4", detail: "Technical, content, trust, conversion", tone: "good" },
   { label: "Revenue path", value: "Started", detail: "Report sharing, lead requests, pricing pages", tone: "good" },
 ];
@@ -59,7 +59,7 @@ const monitorItems = [
   "Recent scans are saved in browser storage until database storage is added.",
   "Lead requests save to GitHub Issues when GITHUB_LEAD_TOKEN is configured.",
   "Lead form falls back to email if the lead inbox is not connected yet.",
-  "Payment buttons appear when payment link environment variables are configured.",
+  "Paid checkout is intentionally disabled even if legacy payment links remain configured.",
   "Ollama/AI recommendations are planned, not active.",
 ];
 
@@ -67,7 +67,7 @@ const roadmap = [
   "Move browser scan history into a shared database.",
   "Add admin-only dashboard access.",
   "Add AI-generated action plans from the detected evidence.",
-  "Connect live payment links for full reports and fix plans.",
+  "Review permitted payment providers and test checkout in a separate environment before accepting orders.",
   "Add phone-friendly uptime and lead alerts.",
   "Add scheduled rechecks for saved sites.",
   "Add downloadable branded PDF reports.",
