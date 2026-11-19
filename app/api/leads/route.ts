@@ -1,6 +1,5 @@
 export const runtime = "nodejs";
 
-const DEFAULT_REPO = "Snowman501/crawler-fleet";
 const MAX_TEXT_LENGTH = 6000;
 
 type LeadPayload = {
@@ -26,6 +25,15 @@ export async function POST(request: Request) {
         ok: true,
         stored: false,
         message: "Request captured in the browser. Configure GitHub lead inbox env vars to save requests server-side.",
+      });
+    }
+
+    // Never write customer contact details into a public GitHub issue.
+    if (!(await isPrivateGitHubRepository(inbox))) {
+      return Response.json({
+        ok: true,
+        stored: false,
+        message: "Private lead inbox is unavailable. Please send your request by email.",
       });
     }
 
@@ -82,8 +90,9 @@ function requiredUrl(value: unknown) {
 
 function getGitHubInbox() {
   const token = process.env.GITHUB_LEAD_TOKEN;
-  const repo = process.env.GITHUB_LEAD_REPO ?? DEFAULT_REPO;
-  if (!token) {
+  const repo = process.env.GITHUB_LEAD_REPO;
+  // Explicit configuration is mandatory: a public default could expose PII.
+  if (!token || !repo) {
     return null;
   }
   const [owner, name] = repo.split("/");
@@ -91,6 +100,25 @@ function getGitHubInbox() {
     throw new Error("GITHUB_LEAD_REPO must look like owner/repo.");
   }
   return { token, owner, repo: name };
+}
+
+async function isPrivateGitHubRepository(inbox: { token: string; owner: string; repo: string }) {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(inbox.owner)}/${encodeURIComponent(inbox.repo)}`, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${inbox.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      signal: AbortSignal.timeout(5000),
+      cache: "no-store",
+    });
+    if (!response.ok) return false;
+    const repository = (await response.json()) as { private?: unknown; archived?: unknown };
+    return repository.private === true && repository.archived !== true;
+  } catch {
+    return false;
+  }
 }
 
 async function createGitHubIssue(
