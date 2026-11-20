@@ -319,8 +319,8 @@ function isRelatedHostname(first: string, second: string) {
 function isLoginPage(url: URL, html: string) {
   // A redirect can stay on the same hostname and still land on a login wall.
   const title = extractTitle(html);
-  const authenticationPath = /\\/(?:login|log-in|signin|sign-in|sso)(?:\\/|$)/i.test(url.pathname);
-  const authenticationTitle = /\\b(?:log[ -]?in|sign[ -]?in)\\b/i.test(title);
+  const authenticationPath = /\/(?:login|log-in|signin|sign-in|sso)(?:\/|$)/i.test(url.pathname);
+  const authenticationTitle = /\b(?:log[ -]?in|sign[ -]?in)\b/i.test(title);
   return authenticationPath || authenticationTitle;
 }
 
