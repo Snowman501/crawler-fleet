@@ -285,7 +285,11 @@ async function fetchHtml(input: string) {
       if (!location) {
         throw new Error("Redirect has no destination.");
       }
-      currentUrl = validateUrl(new URL(location, currentUrl).toString());
+      const nextUrl = validateUrl(new URL(location, currentUrl).toString());
+      if (!isRelatedHostname(currentUrl.hostname, nextUrl.hostname)) {
+        throw new Error("Scan incomplete: the website redirected to a different host. No page was scored. Check whether the website requires login or deployment access.");
+      }
+      currentUrl = nextUrl;
       continue;
     }
 
@@ -297,10 +301,27 @@ async function fetchHtml(input: string) {
     }
 
     const html = await readLimitedText(response);
+    if (isLoginPage(currentUrl, html)) {
+      throw new Error("Scan incomplete: the destination is a sign-in page, not the requested public website. No page was scored. Check website access or deployment protection.");
+    }
     return { finalUrl: currentUrl, html };
   }
 
   throw new Error("Too many redirects.");
+}
+
+function isRelatedHostname(first: string, second: string) {
+  const a = first.toLowerCase();
+  const b = second.toLowerCase();
+  return a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+}
+
+function isLoginPage(url: URL, html: string) {
+  // A redirect can stay on the same hostname and still land on a login wall.
+  const title = extractTitle(html);
+  const authenticationPath = /\\/(?:login|log-in|signin|sign-in|sso)(?:\\/|$)/i.test(url.pathname);
+  const authenticationTitle = /\\b(?:log[ -]?in|sign[ -]?in)\\b/i.test(title);
+  return authenticationPath || authenticationTitle;
 }
 
 async function fetchOriginChecks(url: URL): Promise<OriginChecks> {
